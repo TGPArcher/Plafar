@@ -2,24 +2,24 @@ package plafar.domain;
 
 public class StoreItem extends Item {
 	private float price;
-	private int cuantity;
+	private int quantity;
 	
 	public StoreItem(){
 		super();
 		setPrice(0);
-		setCuantity(0);
+		setQuantity(0);
 	}
 	
-	public StoreItem(int id, String name, String description, float price, int cuantity) {
+	public StoreItem(int id, String name, String description, float price, int quantity) {
 		super(id, name, description);
 		setPrice(price);
-		setCuantity(cuantity);
+		setQuantity(quantity);
 	}
 	
-	public StoreItem(Item item, float price, int cuantity) {
+	public StoreItem(Item item, float price, int quantity) {
 		super(item);
 		setPrice(price);
-		setCuantity(cuantity);
+		setQuantity(quantity);
 	}
 	
 	public float getPrice() {
@@ -34,15 +34,15 @@ public class StoreItem extends Item {
 		this.price = price;
 	}
 	
-	public int getCuantity() {
-		return cuantity;
+	public int getQuantity() {
+		return quantity;
 	}
 	
-	public void setCuantity(int cuantity) {
+	public void setQuantity(int cuantity) {
 		if(cuantity < 0) {
 			cuantity = 0;
 		}
 		
-		this.cuantity = cuantity;
+		this.quantity = cuantity;
 	}
 }

@@ -35,7 +35,7 @@ public class ItemRepository implements Persistent<StoreItem> {
 			pstmt.setString(1, object.getName());
 			pstmt.setString(2, object.getDescription());
 			pstmt.setFloat(3, object.getPrice());
-			pstmt.setInt(4, object.getCuantity());
+			pstmt.setInt(4, object.getQuantity());
 			status = pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -78,7 +78,7 @@ public class ItemRepository implements Persistent<StoreItem> {
 			pstmt.setString(1, object.getName());
 			pstmt.setString(2, object.getDescription());
 			pstmt.setFloat(3, object.getPrice());
-			pstmt.setInt(4, object.getCuantity());
+			pstmt.setInt(4, object.getQuantity());
 			pstmt.setInt(5, object.getId());
 			status = pstmt.executeUpdate();
 		}

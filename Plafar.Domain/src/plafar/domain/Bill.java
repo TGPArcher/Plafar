@@ -3,26 +3,26 @@ package plafar.domain;
 public class Bill {
 	private int id;
 	private int itemId;
-	private int cuantity;
+	private int quantity;
 	private float price;
 	
 	public Bill() {
 		id = 0;
 		itemId = 0;
-		cuantity = 0;
+		quantity = 0;
 		price = 0;
 	}
 	
-	public Bill(int itemId, int cuantity, float price) {
+	public Bill(int itemId, int quantity, float price) {
 		this.itemId = itemId;
-		this.cuantity = cuantity;
+		this.quantity = quantity;
 		this.price = price;
 	}
 	
-	public Bill(int id, int itemId, int cuantity, float price) {
+	public Bill(int id, int itemId, int quantity, float price) {
 		this.id = id;
 		this.itemId = itemId;
-		this.cuantity = cuantity;
+		this.quantity = quantity;
 		this.price = price;
 	}
 	
@@ -42,16 +42,16 @@ public class Bill {
 		return itemId;
 	}
 	
-	public int getCuantity() {
-		return cuantity;
+	public int getQuantity() {
+		return quantity;
 	}
 	
-	public void setCuantity(int cuantity) {
-		if(cuantity < 0) {
-			cuantity = 0;
+	public void setQuantity(int quantity) {
+		if(quantity < 0) {
+			quantity = 0;
 		}
 		
-		this.cuantity = cuantity;
+		this.quantity = quantity;
 	}
 	
 	public float getPrice() {

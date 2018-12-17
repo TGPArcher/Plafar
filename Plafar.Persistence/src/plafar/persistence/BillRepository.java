@@ -26,13 +26,13 @@ public class BillRepository implements Persistent<Bill> {
 			return false;
 		}
 		
-		String sql = "INSERT INTO bills(itemId, cuantity, price) VALUES(?,?,?)";
+		String sql = "INSERT INTO bills(itemId, quantity, price) VALUES(?,?,?)";
 		int status = 0;
 		
 		try {
 			PreparedStatement pstmt = connection.prepareStatement(sql);
 			pstmt.setInt(1, object.getItemId());
-			pstmt.setInt(2, object.getCuantity());
+			pstmt.setInt(2, object.getQuantity());
 			pstmt.setFloat(3, object.getPrice());
 			status = pstmt.executeUpdate();
 		} 
@@ -48,14 +48,14 @@ public class BillRepository implements Persistent<Bill> {
 	@Override
 	public Bill getObject(int objectId) {
 		Bill bill = null;
-		String sql = "SELECT id, itemId, cuantity, price FROM bills WHERE id = ?";
+		String sql = "SELECT id, itemId, quantity, price FROM bills WHERE id = ?";
 		
 		try {
 			PreparedStatement pstmt = connection.prepareStatement(sql);
 			pstmt.setInt(1, objectId);
 			ResultSet result = pstmt.executeQuery();
 			while(result.next()) {
-				bill = new Bill(result.getInt("id"), result.getInt("itemId"), result.getInt("cuantity"), result.getFloat("price"));
+				bill = new Bill(result.getInt("id"), result.getInt("itemId"), result.getInt("quantity"), result.getFloat("price"));
 			}
 		}
 		catch(SQLException e) {
@@ -67,13 +67,13 @@ public class BillRepository implements Persistent<Bill> {
 
 	@Override
 	public boolean editObject(Bill object) {
-		String sql = "UPDATE bills SET itemId = ? , cuantity = ? , price = ? WHERE id = ?;";
+		String sql = "UPDATE bills SET itemId = ? , quantity = ? , price = ? WHERE id = ?;";
 		int status = 0;
 		
 		try {
 			PreparedStatement pstmt = connection.prepareStatement(sql);
 			pstmt.setInt(1, object.getItemId());
-			pstmt.setInt(2, object.getCuantity());
+			pstmt.setInt(2, object.getQuantity());
 			pstmt.setFloat(3, object.getPrice());
 			pstmt.setInt(4, object.getId());
 			status = pstmt.executeUpdate();
@@ -109,7 +109,7 @@ public class BillRepository implements Persistent<Bill> {
 	@Override
 	public List<Bill> getAllObjects() {
 		List<Bill> bills = new LinkedList<Bill>();
-		String sql = "SELECT id, itemId, cuantity, price FROM bills";
+		String sql = "SELECT id, itemId, quantity, price FROM bills";
 		
 		try {
 			PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -118,7 +118,7 @@ public class BillRepository implements Persistent<Bill> {
 				bills.add(new Bill(
 					result.getInt("id"),
 					result.getInt("itemId"),
-					result.getInt("cuantity"),
+					result.getInt("quantity"),
 					result.getFloat("price")));
 			}
 		}
@@ -134,7 +134,7 @@ public class BillRepository implements Persistent<Bill> {
 		String sql = "CREATE TABLE IF NOT EXISTS bills (\n"
                 + "	id integer PRIMARY KEY AUTOINCREMENT,\n"
 				+ " itemId integer NOT NULL,\n"
-                + "	cuantity integer NOT NULL,\n"
+                + "	quantity integer NOT NULL,\n"
                 + "	price real NOT NULL\n"
                 + ");";
 		

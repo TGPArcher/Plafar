@@ -51,7 +51,7 @@ public class TestBillRepository {
 		List<Bill> bls = bills.getAllObjects();
 		for(int i = 0; i < bls.size(); i++) {
 			Bill bill = bls.get(i);
-			System.out.println(bill.getId() + " " + bill.getItemId() + " " + bill.getCuantity() + " " + bill.getPrice());
+			System.out.println(bill.getId() + " " + bill.getItemId() + " " + bill.getQuantity() + " " + bill.getPrice());
 		}
 	}
 }

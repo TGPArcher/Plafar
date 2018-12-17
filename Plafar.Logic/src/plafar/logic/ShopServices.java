@@ -30,13 +30,13 @@ public class ShopServices implements ShopingServices {
 			return null;
 		}
 		
-		if(item.getCuantity() < quantity) {
+		if(item.getQuantity() < quantity) {
 			System.out.println("Trying to sell more items than we have available");
 			return null;
 		}
 		
 		Bill bill = new Bill(item.getId(), quantity, item.getPrice());
-		item.setCuantity(item.getCuantity() - quantity);
+		item.setQuantity(item.getQuantity() - quantity);
 		return bill;
 	}
 
@@ -51,7 +51,7 @@ public class ShopServices implements ShopingServices {
 			return false;
 		}
 		
-		item.setCuantity(quantity);
+		item.setQuantity(quantity);
 		item.setPrice(price);
 		return itemRepository.addObject(item);
 	}
@@ -79,7 +79,7 @@ public class ShopServices implements ShopingServices {
 		for(int i = 0; i < allItems.size(); i++) {
 			StoreItem item = allItems.get(i);
 			
-			if(item.getCuantity() > 0) {
+			if(item.getQuantity() > 0) {
 				availableItems.add(item);
 			}
 		}
@@ -95,7 +95,7 @@ public class ShopServices implements ShopingServices {
 		for(int i = 0; i < allItems.size(); i++) {
 			StoreItem item = allItems.get(i);
 			
-			if(item.getCuantity() == 0) {
+			if(item.getQuantity() == 0) {
 				unavailableItems.add(item);
 			}
 		}

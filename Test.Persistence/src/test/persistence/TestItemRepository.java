@@ -53,7 +53,7 @@ public class TestItemRepository {
 		List<StoreItem> itms = items.getAllObjects();
 		for(int i = 0; i < itms.size(); i++) {
 			StoreItem item = itms.get(i);
-			System.out.println(item.getId() + " " + item.getName() + " " + item.getDescription() + " " + item.getPrice() + " " + item.getCuantity());
+			System.out.println(item.getId() + " " + item.getName() + " " + item.getDescription() + " " + item.getPrice() + " " + item.getQuantity());
 		}
 	}
 }
