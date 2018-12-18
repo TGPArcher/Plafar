@@ -23,25 +23,26 @@ public class BillServices implements BillingService {
 	}
 
 	@Override
-	public void registerBill(Bill bill) {
+	public boolean registerBill(Bill bill) {
 		if(bill == null) {
-			System.out.println("Trying to register a null bill");
-			return;
+			return false;
 		}
 		
-		boolean status = billRepository.addObject(bill);
-		
-		if(status) {
-			System.out.println("Bill registered succesfully!");
-		}
-		else {
-			System.out.println("Failed to register bill!");
-		}
+		return billRepository.addObject(bill);
 	}
 
 	@Override
 	public boolean deleteBill(int billId) {
 		return billRepository.deleteObject(billId);
+	}
+
+	@Override
+	public boolean editBill(Bill bill) {
+		if(bill == null) {
+			return false;
+		}
+		
+		return billRepository.editObject(bill);
 	}
 	
 }
