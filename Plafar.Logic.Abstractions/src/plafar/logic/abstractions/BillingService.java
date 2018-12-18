@@ -5,6 +5,7 @@ import plafar.domain.Bill;
 public interface BillingService {
 	List<Bill> getAllBills();
 	Bill getBill(int billId);
-	void registerBill(Bill bill);
+	boolean registerBill(Bill bill);
+	boolean editBill(Bill bill);
 	boolean deleteBill(int billId);
 }
