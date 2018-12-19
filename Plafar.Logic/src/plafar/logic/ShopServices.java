@@ -41,18 +41,11 @@ public class ShopServices implements ShopingServices {
 	}
 
 	@Override
-	public boolean registerItem(StoreItem item, int quantity, float price) {
+	public boolean registerItem(StoreItem item) {
 		if(item == null) {
 			System.out.println("Trying to register a null item");
 			return false;
 		}
-		if(quantity < 0 || price < 0f) {
-			System.out.println("Trying to register a item with invalid parameters");
-			return false;
-		}
-		
-		item.setQuantity(quantity);
-		item.setPrice(price);
 		return itemRepository.addObject(item);
 	}
 
@@ -101,6 +94,11 @@ public class ShopServices implements ShopingServices {
 		}
 		
 		return unavailableItems;
+	}
+
+	@Override
+	public boolean deleteItem(int itemId) {
+		return itemRepository.deleteObject(itemId);
 	}
 
 }
