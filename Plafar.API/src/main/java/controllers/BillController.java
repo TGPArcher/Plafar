@@ -54,11 +54,11 @@ public class BillController {
 		});
 	}
 	
-	public ResponseStatement getBills() {
+	private ResponseStatement getBills() {
 		return new ResponseStatement(200, toJsonTree(billService.getAllBills()));
 	}
 	
-	public ResponseStatement getBill(String id) {
+	private ResponseStatement getBill(String id) {
 		int billId = 0;
 		try {
 			billId = Integer.parseInt(id);
@@ -75,7 +75,7 @@ public class BillController {
 		return new ResponseStatement(404, "Could not find bill");
 	}
 	
-	public ResponseStatement addBill(String body) {
+	private ResponseStatement addBill(String body) {
 		Bill newBill = null;
 		try {
 			newBill = fromJson(body, Bill.class);
@@ -93,7 +93,7 @@ public class BillController {
 		return new ResponseStatement(400, "Trying to add an existent bill");
 	}
 	
-	public ResponseStatement editBill(String body) {
+	private ResponseStatement editBill(String body) {
 		Bill editedBill = null;
 		try {
 			editedBill = fromJson(body, Bill.class);
@@ -110,7 +110,7 @@ public class BillController {
 		return new ResponseStatement(400, "Could not modify bill");
 	}
 	
-	public ResponseStatement deleteBill(String id) {
+	private ResponseStatement deleteBill(String id) {
 		int billId = 0;
 		try{
 			billId = Integer.parseInt(id);
