@@ -3,9 +3,10 @@ package controllers;
 import static spark.Spark.*;
 import static util.JsonUtil.*;
 
-import java.util.List;
+import com.google.gson.JsonSyntaxException;
 import plafar.domain.Bill;
 import plafar.logic.abstractions.BillingService;
+import response.ResponseStatement;
 
 public class BillController {
 
@@ -17,23 +18,33 @@ public class BillController {
 		path("api", () -> {
 			path("/bills", () -> {
 				get("", (req, res) -> {
-					return getBills();
+					ResponseStatement result = getBills();
+					res.status(result.getStatus());
+					return result;
 				}, json());
 				
 				get("/:id", (req, res) -> {
-					return getBill(req.params(":id"));
+					ResponseStatement result = getBill(req.params(":id"));
+					res.status(result.getStatus());
+					return result;
 				}, json());
 				
 				post("/add", (req, res) -> {
-					return addBill(req.body());
+					ResponseStatement result = addBill(req.body());
+					res.status(result.getStatus());
+					return result;
 				}, json());
 				
 				put("/edit", (req, res) -> {
-					return editBill(req.body());
+					ResponseStatement result = editBill(req.body());
+					res.status(result.getStatus());
+					return result;
 				}, json());
 				
 				delete("/delete/:id", (req, res) -> {
-					return deleteBill(req.params(":id"));
+					ResponseStatement result = deleteBill(req.params(":id"));
+					res.status(result.getStatus());
+					return result;
 				}, json());
 			});
 		});
@@ -43,56 +54,76 @@ public class BillController {
 		});
 	}
 	
-	public List<Bill> getBills() {
-		return billService.getAllBills();
+	public ResponseStatement getBills() {
+		return new ResponseStatement(200, toJsonTree(billService.getAllBills()));
 	}
 	
-	public Bill getBill(String id) {
+	public ResponseStatement getBill(String id) {
 		int billId = 0;
 		try {
 			billId = Integer.parseInt(id);
 		}
 		catch(NumberFormatException e) {
-			return null;
+			return new ResponseStatement(400, "Wrong id format");
 		}
 		
-		return billService.getBill(billId);
+		Bill bill = billService.getBill(billId);
+		if(bill != null) {
+			return new ResponseStatement(200, toJsonTree(bill));
+		}
+		
+		return new ResponseStatement(404, "Could not find bill");
 	}
 	
-	public boolean addBill(String body) {
+	public ResponseStatement addBill(String body) {
 		Bill newBill = null;
 		try {
 			newBill = fromJson(body, Bill.class);
 		}
-		catch(Exception e) {
-			System.out.println(e.getMessage());
-			return false;
+		catch(JsonSyntaxException e) {
+			return new ResponseStatement(400, "Could not bind json to object");
 		}
 		
-		return billService.registerBill(newBill);
+		boolean result = billService.registerBill(newBill);
+		
+		if(result) {
+			return new ResponseStatement(201);
+		}
+		
+		return new ResponseStatement(400, "Trying to add an existent bill");
 	}
 	
-	public boolean editBill(String body) {
+	public ResponseStatement editBill(String body) {
 		Bill editedBill = null;
 		try {
 			editedBill = fromJson(body, Bill.class);
 		}
-		catch(Exception e) {
-			return false;
+		catch(JsonSyntaxException e) {
+			return new ResponseStatement(400, "Could not bind json to object");
 		}
 		
-		return billService.editBill(editedBill);
+		boolean result = billService.editBill(editedBill);
+		if(result) {
+			return new ResponseStatement(200, toJsonTree(billService.getBill(editedBill.getId())));
+		}
+		
+		return new ResponseStatement(400, "Could not modify bill");
 	}
 	
-	public boolean deleteBill(String id) {
+	public ResponseStatement deleteBill(String id) {
 		int billId = 0;
 		try{
 			billId = Integer.parseInt(id);
 		}
 		catch(NumberFormatException e) {
-			return false;
+			return new ResponseStatement(400, "Wrong id format");
 		}
 		
-		return billService.deleteBill(billId);
+		boolean result = billService.deleteBill(billId);
+		if(result) {
+			return new ResponseStatement(200);
+		}
+		
+		return new ResponseStatement(400, "Could not remove bill");
 	}
 }
