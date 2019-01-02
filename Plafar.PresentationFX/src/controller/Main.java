@@ -1,9 +1,8 @@
 package controller;
 
-import Views.Page;
+import Views.*;
 import Views.StoreListPage;
 import javafx.application.*;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -14,11 +13,9 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setScene(createScene(new StoreListPage("Store Items")));
-		primaryStage.show();
-	}
-	
-	private Scene createScene(Page page) {
-		return new Scene(page.doContents(), 700, 500);
+		PageHandler.setStage(primaryStage);
+		PageHandler.setMenu(new MenuPage());
+		PageHandler.setActivePage(new StoreListPage());
+		PageHandler.show();
 	}
 }
