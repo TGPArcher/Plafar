@@ -7,32 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-public class StoreListPage extends Page implements MenuAccessible{
+public class StoreListPage extends Page{
 	
 	public StoreListPage() {
-		setTitle("");
-	}
-	
-	public StoreListPage(String title) {
-		setTitle(title);
-	}
-	
-	@Override
-	public Parent doContents() {
-		Parent menuBar = new MenuPage().doContents();
-		HBox screenContent = new HBox(menuBar);
-		
-		VBox pageContent = new VBox(drawTitle(), drawHeader(), drawItemList());
-		HBox.setHgrow(pageContent, Priority.ALWAYS);
-		screenContent.getChildren().add(pageContent);
-		
-		return screenContent;
-	}
-	
-	@Override
-	public Pane getMenuButton() {
-		// TODO Auto-generated method stub
-		return null;
+		setTitle("Store");
 	}
 	
 	private Pane drawTitle() {
@@ -88,5 +66,13 @@ public class StoreListPage extends Page implements MenuAccessible{
 		itemPane.getChildren().add(sellBtn);
 		
 		return itemPane;
+	}
+
+	@Override
+	public Parent doContents() {
+		VBox pageContent = new VBox(drawTitle(), drawHeader(), drawItemList());
+		HBox.setHgrow(pageContent, Priority.ALWAYS);
+		
+		return pageContent;
 	}
 }
