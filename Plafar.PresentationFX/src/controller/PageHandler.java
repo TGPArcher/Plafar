@@ -1,5 +1,8 @@
-package Views;
+package controller;
 
+import Views.MenuPage;
+import Views.Page;
+import Views.StoreListPage;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -52,6 +55,6 @@ public final class PageHandler {
 			screenContent.getChildren().add(activePage.doContents());
 		}
 		
-		return new Scene(screenContent, 700, 500);
+		return new Scene(screenContent);
 	}
 }
