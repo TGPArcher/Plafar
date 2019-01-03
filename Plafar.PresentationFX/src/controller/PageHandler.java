@@ -49,12 +49,12 @@ public final class PageHandler {
 	private static Scene createScene() {
 		HBox screenContent = new HBox();
 		if(menuPage != null) {
-			screenContent.getChildren().add(menuPage.doContents());
+			screenContent.getChildren().add(menuPage.getContents());
 		}
 		if(activePage != null) {
-			screenContent.getChildren().add(activePage.doContents());
+			screenContent.getChildren().add(activePage.getContents());
 		}
 		
-		return new Scene(screenContent);
+		return new Scene(screenContent, 700, 500);
 	}
 }
