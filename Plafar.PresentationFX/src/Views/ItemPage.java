@@ -14,10 +14,11 @@ public class ItemPage extends Page{
 	
 	public ItemPage() {
 		item = new StoreItem();
+		contents = doContents();
 	}
 	
 	@Override
-	public Parent doContents() {
+	protected Parent doContents() {
 		Label nameLabel = new Label("Name:");
 		TextField name = new TextField();
 		Label descriptionLabel = new Label("Description:");

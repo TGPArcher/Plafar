@@ -15,24 +15,46 @@ import javafx.scene.layout.*;
 import plafar.domain.StoreItem;
 
 public class StoreListPage extends Page{
+	
 	private List<StoreItem> items = null;
 	
 	private Button editBtn = null;
 	private Button deleteBtn = null;
 	
+	private CheckBox available = null;
+	private CheckBox unavailable = null;
+	
 	// prototype test only
 	public StoreListPage() {
-		setTitle("Store");
 		items = new LinkedList<StoreItem>();
 		items.add(new StoreItem(0, "Patlagina", "Cel mai lecuitor lucru ever", 3.56f, 9));
 		items.add(new StoreItem(0, "Curcunea", "Cel mai lecuitor lucru ever", 3.6f, 2));
 		items.add(new StoreItem(0, "Sires", "Ieftin bun si mult in kill", 1.99f, 99));
 		items.add(new StoreItem(0, "Patlajeli", "Siz di multi patlajeli", 0.56f, 200));
+		setTitle("Store");
+		contents = doContents();
 	}
 	
 	public StoreListPage(List<StoreItem> items) {
-		this.items = items;
+		if(items == null) {
+			this.items = new LinkedList<StoreItem>();
+		}
+		else {
+			this.items = items;
+		}
 		setTitle("Store");
+		contents = doContents();
+	}
+	
+	public StoreListPage(List<StoreItem> items, boolean available, boolean unavailable) {
+		if(items == null) {
+			this.items = new LinkedList<StoreItem>();
+		}
+		else {
+			this.items = items;
+		}
+		setTitle("Store");
+		contents = doContents();
 	}
 	
 	private Pane drawTitle() {
@@ -43,10 +65,10 @@ public class StoreListPage extends Page{
 	}
 	
 	private Pane drawHeader() {
-		CheckBox available = new CheckBox("Available");
+		available = new CheckBox("Available");
 		available.setSelected(true);
 		
-		CheckBox unavailable = new CheckBox("Unavailable");
+		unavailable = new CheckBox("Unavailable");
 		unavailable.setSelected(true);
 		
 		Region freeRegion = new Region();
@@ -81,8 +103,7 @@ public class StoreListPage extends Page{
 		list.getSelectionModel().selectedItemProperty().addListener(
 	            new ChangeListener<HBox>() {
 	                public void changed(ObservableValue<? extends HBox> ov, HBox old_val, HBox new_val) {
-	                        editBtn.setDisable(false);
-	                        deleteBtn.setDisable(false);
+	                	setDisableControllButtons(false);
 	                }
 	            });
 		
@@ -114,9 +135,14 @@ public class StoreListPage extends Page{
 		
 		return itemPane;
 	}
+	
+	private void setDisableControllButtons(boolean val) {
+		editBtn.setDisable(val);
+        deleteBtn.setDisable(val);
+	}
 
 	@Override
-	public Parent doContents() {
+	protected Parent doContents() {
 		VBox pageContent = new VBox(drawTitle(), drawHeader(), drawItemList());
 		HBox.setHgrow(pageContent, Priority.ALWAYS);
 		

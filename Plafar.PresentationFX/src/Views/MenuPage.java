@@ -16,10 +16,11 @@ public class MenuPage extends Page {
 	public MenuPage() {
 		setTitle("Main Menu");
 		pageContent.setFillWidth(true);
+		contents = doContents();
 	}
 	
 	@Override
-	public Parent doContents() {
+	protected Parent doContents() {
 		// logo
 		addImage("file:C:/Users/TGP/Desktop/icon-herb.png", true);
 		

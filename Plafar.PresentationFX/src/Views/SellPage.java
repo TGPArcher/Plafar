@@ -14,14 +14,16 @@ public class SellPage extends Page {
 	// testing only
 	public SellPage() {
 		this.item = new StoreItem(0, "Patlagina", "Cel mai bun", 3.56f, 8);
+		contents = doContents();
 	}
 	
 	public SellPage(StoreItem item) {
 		this.item = item;
+		contents = doContents();
 	}
 	
 	@Override
-	public Parent doContents() {
+	protected Parent doContents() {
 		Label name = new Label(item.getName());
 		Separator nameSeparator = new Separator();
 		nameSeparator.setPadding(new Insets(0, 25, 5, 25));
