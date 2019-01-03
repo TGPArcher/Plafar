@@ -21,8 +21,7 @@ public class MenuPage extends Page {
 	@Override
 	public Parent doContents() {
 		// logo
-		addImage("file:C:/Users/TGP/Desktop/listsm.png", true);
-		
+		addImage("file:C:/Users/TGP/Desktop/icon-herb.png", true);
 		
 		// store list page
 		addButton("Store", "file:C:/Users/TGP/Desktop/listsm.png", true);
