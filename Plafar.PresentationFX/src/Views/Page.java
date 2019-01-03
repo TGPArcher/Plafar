@@ -3,7 +3,8 @@ package Views;
 import javafx.scene.Parent;
 
 public abstract class Page {
-	private String title;
+	protected Parent contents = null;
+	private String title = null;
 	
 	public void setTitle(String title) {
 		this.title = title;
@@ -13,5 +14,9 @@ public abstract class Page {
 		return title;
 	}
 	
-	public abstract Parent doContents();
+	protected abstract Parent doContents();
+	
+	public Parent getContents() {
+		return contents;
+	}
 }
