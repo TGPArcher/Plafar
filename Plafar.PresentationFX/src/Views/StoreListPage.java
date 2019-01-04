@@ -1,8 +1,10 @@
-package Views;
+package views;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import controller.ItemController;
+import controller.StoreController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,25 +17,19 @@ import javafx.scene.layout.*;
 import plafar.domain.StoreItem;
 
 public class StoreListPage extends Page{
+	// pref data to be persisted during one session;
+	public static boolean prefAvailable = true;
+	public static boolean prefUnavailable = true;
 	
 	private List<StoreItem> items = null;
+	private ListView<HBox> list = null;
 	
+	private Button addBtn = null;
 	private Button editBtn = null;
 	private Button deleteBtn = null;
 	
 	private CheckBox available = null;
 	private CheckBox unavailable = null;
-	
-	// prototype test only
-	public StoreListPage() {
-		items = new LinkedList<StoreItem>();
-		items.add(new StoreItem(0, "Patlagina", "Cel mai lecuitor lucru ever", 3.56f, 9));
-		items.add(new StoreItem(0, "Curcunea", "Cel mai lecuitor lucru ever", 3.6f, 2));
-		items.add(new StoreItem(0, "Sires", "Ieftin bun si mult in kill", 1.99f, 99));
-		items.add(new StoreItem(0, "Patlajeli", "Siz di multi patlajeli", 0.56f, 200));
-		setTitle("Store");
-		contents = doContents();
-	}
 	
 	public StoreListPage(List<StoreItem> items) {
 		if(items == null) {
@@ -44,24 +40,8 @@ public class StoreListPage extends Page{
 		}
 		setTitle("Store");
 		contents = doContents();
-	}
-	
-	public StoreListPage(List<StoreItem> items, boolean available, boolean unavailable) {
-		if(items == null) {
-			this.items = new LinkedList<StoreItem>();
-		}
-		else {
-			this.items = items;
-		}
-		setTitle("Store");
-		contents = doContents();
-	}
-	
-	private Pane drawTitle() {
-		Label titleLabel = new Label(getTitle());
-		Separator titleSeparator = new Separator();
-		
-		return new VBox(titleLabel, titleSeparator);
+		setCheckBoxAction();
+		setItemButtonsAction();
 	}
 	
 	private Pane drawHeader() {
@@ -74,7 +54,7 @@ public class StoreListPage extends Page{
 		Region freeRegion = new Region();
 		HBox.setHgrow(freeRegion, Priority.ALWAYS);
 		
-		Button addBtn = new Button("Add");
+		addBtn = new Button("Add");
 		addBtn.setAlignment(Pos.CENTER);
 		editBtn = new Button("Edit");
 		editBtn.setAlignment(Pos.CENTER);
@@ -98,7 +78,7 @@ public class StoreListPage extends Page{
 			itemsBox.add(drawItem(items.get(i)));
 		}
 		
-		ListView<HBox> list = new ListView<HBox>(itemsBox);
+		list = new ListView<HBox>(itemsBox);
 		list.setFixedCellSize(30);
 		list.getSelectionModel().selectedItemProperty().addListener(
 	            new ChangeListener<HBox>() {
@@ -131,9 +111,51 @@ public class StoreListPage extends Page{
 		itemPane.getChildren().add(price);
 		
 		Button sellBtn = new Button("Sell");
+		sellBtn.setOnAction((event) -> {
+			StoreController.sellItemPage(item);
+		});
 		itemPane.getChildren().add(sellBtn);
 		
 		return itemPane;
+	}
+	
+	private void setCheckBoxAction() {
+		available.setSelected(prefAvailable);
+		unavailable.setSelected(prefUnavailable);
+		
+		available.setOnAction((event) -> {
+			prefAvailable = !prefAvailable;
+			StoreController.setStorePage();
+		});
+		
+		unavailable.setOnAction((event) -> {
+			prefUnavailable = !prefUnavailable;
+			StoreController.setStorePage();
+		});
+	}
+	
+	private void setItemButtonsAction() {
+		addBtn.setOnAction((event) -> {
+			ItemController.setAddItemPage();
+		});
+		
+		editBtn.setOnAction((event) -> {
+			StoreItem item = getSelectedItem();
+			if(item == null) {
+				return;
+			}
+			
+			ItemController.setEditItemPage(item);
+		});
+		
+		deleteBtn.setOnAction((event) -> {
+			StoreItem item = getSelectedItem();
+			if(item == null) {
+				return;
+			}
+			
+			ItemController.setDeleteItemPage(item);
+		});
 	}
 	
 	private void setDisableControllButtons(boolean val) {
@@ -147,5 +169,14 @@ public class StoreListPage extends Page{
 		HBox.setHgrow(pageContent, Priority.ALWAYS);
 		
 		return pageContent;
+	}
+	
+	public StoreItem getSelectedItem() {
+		int index = list.getSelectionModel().getSelectedIndex();
+		if(index == -1) {
+			return null;
+		}
+		
+		return items.get(index);
 	}
 }
