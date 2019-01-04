@@ -1,6 +1,7 @@
-package Views;
+package views;
 
 import Formatters.UnsignedIntegerFormatter;
+import controller.StoreController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -11,6 +12,10 @@ import plafar.domain.StoreItem;
 public class SellPage extends Page {
 	private StoreItem item = null;
 	
+	private TextField sellField = null;
+	private Button sellBtn = null;
+	private Button cancelBtn = null;
+	
 	// testing only
 	public SellPage() {
 		this.item = new StoreItem(0, "Patlagina", "Cel mai bun", 3.56f, 8);
@@ -20,6 +25,8 @@ public class SellPage extends Page {
 	public SellPage(StoreItem item) {
 		this.item = item;
 		contents = doContents();
+		setSellBtnAction();
+		setCancelBtnAction();
 	}
 	
 	@Override
@@ -36,9 +43,9 @@ public class SellPage extends Page {
 		VBox availableBox = new VBox(availableLabel, available);
 		
 		Label sellLabel = new Label("Sell");
-		TextField sell = new TextField("1");
-		sell.setTextFormatter(UnsignedIntegerFormatter.getFormatter(1, item.getQuantity()));
-		VBox buyBox = new VBox(sellLabel, sell);
+		sellField = new TextField("1");
+		sellField.setTextFormatter(UnsignedIntegerFormatter.getFormatter(1, item.getQuantity()));
+		VBox buyBox = new VBox(sellLabel, sellField);
 		
 		HBox grid1 = new HBox(10, availableBox, buyBox);
 		grid1.setAlignment(Pos.CENTER);
@@ -51,7 +58,7 @@ public class SellPage extends Page {
 		Label costLabel = new Label("Cost");
 		TextField cost = new TextField(String.valueOf(item.getPrice()));
 		cost.setDisable(true);
-		sell.textProperty().addListener((obs, oldText, newText) -> {
+		sellField.textProperty().addListener((obs, oldText, newText) -> {
 		    cost.setText(getTotalCost(newText));
 		});
 		VBox costBox = new VBox(costLabel, cost);
@@ -59,8 +66,8 @@ public class SellPage extends Page {
 		HBox grid2 = new HBox(10, priceBox, costBox);
 		grid2.setAlignment(Pos.CENTER);
 		
-		Button sellBtn = new Button("Confirm");
-		Button cancelBtn = new Button("Cancel");
+		sellBtn = new Button("Confirm");
+		cancelBtn = new Button("Cancel");
 		HBox grid3 = new HBox(10, sellBtn, cancelBtn);
 		grid3.setAlignment(Pos.CENTER);
 		
@@ -79,6 +86,27 @@ public class SellPage extends Page {
 		catch(NumberFormatException e) {
 			return "";
 		}
+	}
+	
+	private void setSellBtnAction() {
+		sellBtn.setOnAction((event) -> {
+			int quantity = 0;
+			try {
+				quantity = Integer.parseInt(sellField.getText());
+			}
+			catch(NumberFormatException e) {
+				System.out.println(e.getMessage());
+				return;
+			}
+			
+			StoreController.sellItem(item, quantity);
+		});
+	}
+	
+	private void setCancelBtnAction() {
+		cancelBtn.setOnAction((event) -> {
+			StoreController.setStorePage();
+		});
 	}
 
 }
