@@ -1,6 +1,5 @@
 package controller;
 
-import Views.*;
 import javafx.application.*;
 import javafx.stage.Stage;
 
@@ -12,9 +11,9 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		// Initialize PageHandler
 		PageHandler.setStage(primaryStage);
-		PageHandler.setMenu(new MenuPage());
-		PageHandler.setActivePage(new ItemPage());
-		PageHandler.show();
+		// Set entry page
+		StoreController.setStorePage();
 	}
 }

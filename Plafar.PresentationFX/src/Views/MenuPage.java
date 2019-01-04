@@ -1,5 +1,7 @@
-package Views;
+package views;
 
+import controller.BillController;
+import controller.StoreController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -10,13 +12,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 public class MenuPage extends Page {
-
 	private VBox pageContent = new VBox();
+	private Button storeBtn = null;
+	private Button billBtn = null;
 	
 	public MenuPage() {
 		setTitle("Main Menu");
 		pageContent.setFillWidth(true);
 		contents = doContents();
+		setButtonsAction();
 	}
 	
 	@Override
@@ -25,10 +29,10 @@ public class MenuPage extends Page {
 		addImage("file:C:/Users/TGP/Desktop/icon-herb.png", true);
 		
 		// store list page
-		addButton("Store", "file:C:/Users/TGP/Desktop/listsm.png", true);
+		storeBtn = addButton("Store", "file:C:/Users/TGP/Desktop/listsm.png", true);
 		
 		// bill list page
-		addButton("Bill history", "file:C:/Users/TGP/Desktop/listsm.png", false);
+		billBtn = addButton("Bill history", "file:C:/Users/TGP/Desktop/listsm.png", false);
 		
 		
 		return pageContent;
@@ -65,7 +69,7 @@ public class MenuPage extends Page {
 		}
 	}
 	
-	private void addButton(String text, String graphicPath, boolean separator) {
+	private Button addButton(String text, String graphicPath, boolean separator) {
 		ImageView btnImage = null;
 		if(graphicPath != null) {
 			btnImage = getImage(graphicPath);
@@ -83,5 +87,25 @@ public class MenuPage extends Page {
 		if(separator) {
 			addSeparator();
 		}
+		
+		return btn;
+	}
+	
+	public void setStoreBtnDisabled(boolean val) {
+		storeBtn.setDisable(val);
+	}
+	
+	public void setBillBtnDisabled(boolean val) {
+		billBtn.setDisable(val);
+	}
+	
+	public void setButtonsAction() {
+		storeBtn.setOnAction((event) -> {
+			StoreController.setStorePage();
+		});
+		
+		billBtn.setOnAction((event) -> {
+			BillController.setBillPage();
+		});
 	}
 }
