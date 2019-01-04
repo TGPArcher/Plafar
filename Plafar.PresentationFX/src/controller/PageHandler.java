@@ -1,17 +1,15 @@
 package controller;
 
-import Views.MenuPage;
-import Views.Page;
-import Views.StoreListPage;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import views.Page;
 
 public final class PageHandler {
 	private static Stage _stage = null;
 	
-	private static Page menuPage = new MenuPage();
-	private static Page activePage = new StoreListPage();
+	private static Page menuPage = null;
+	private static Page activePage = null;
 	
 	public static void setStage(Stage stage) {
 		if(stage == null) {
@@ -55,6 +53,6 @@ public final class PageHandler {
 			screenContent.getChildren().add(activePage.getContents());
 		}
 		
-		return new Scene(screenContent, 700, 500);
+		return new Scene(screenContent, 900, 600);
 	}
 }
