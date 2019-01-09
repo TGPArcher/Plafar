@@ -39,7 +39,7 @@ public class ShopController {
 					return result;
 				}, json());
 				
-				get("/sell/:quantity", (req, res) -> {
+				put("/sell/:quantity", (req, res) -> {
 					ResponseStatement result = sellItem(req.body(), req.params(":quantity"));
 					res.status(result.getStatus());
 					return result;
