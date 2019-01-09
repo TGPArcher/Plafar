@@ -4,9 +4,7 @@ import com.google.gson.JsonElement;
 
 public class ResponseStatement {
 	private int status;
-	@SuppressWarnings("unused")
 	private String errorMessage;
-	@SuppressWarnings("unused")
 	private JsonElement data;
 	
 	public ResponseStatement(int status) {
@@ -25,5 +23,13 @@ public class ResponseStatement {
 	
 	public int getStatus() {
 		return status;
+	}
+	
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+	
+	public JsonElement getData() {
+		return data;
 	}
 }
