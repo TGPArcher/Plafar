@@ -1,8 +1,7 @@
 package controllers;
 
 import static spark.Spark.*;
-import static util.JsonUtil.*;
-
+import static util.JsonUtilSpark.*;
 import com.google.gson.JsonSyntaxException;
 import plafar.domain.Bill;
 import plafar.logic.abstractions.BillingService;
