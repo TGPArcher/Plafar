@@ -37,6 +37,7 @@ public class ShopServices implements ShopingServices {
 		
 		Bill bill = new Bill(item.getId(), quantity, item.getPrice());
 		item.setQuantity(item.getQuantity() - quantity);
+		itemRepository.editObject(item);
 		return bill;
 	}
 
