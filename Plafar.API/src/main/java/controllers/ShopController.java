@@ -3,6 +3,8 @@ package controllers;
 import static spark.Spark.*;
 import static util.JsonUtilSpark.*;
 import com.google.gson.JsonSyntaxException;
+import com.google.inject.Inject;
+
 import plafar.domain.*;
 import plafar.logic.abstractions.ShopingServices;
 import response.ResponseStatement;
@@ -10,6 +12,7 @@ import response.ResponseStatement;
 public class ShopController {
 	private ShopingServices shopService = null;
 	
+	@Inject
 	public ShopController(ShopingServices shopService) {
 		this.shopService = shopService;
 		

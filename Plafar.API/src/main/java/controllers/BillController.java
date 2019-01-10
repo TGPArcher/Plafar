@@ -3,6 +3,7 @@ package controllers;
 import static spark.Spark.*;
 import static util.JsonUtilSpark.*;
 import com.google.gson.JsonSyntaxException;
+import com.google.inject.Inject;
 import plafar.domain.Bill;
 import plafar.logic.abstractions.BillingService;
 import response.ResponseStatement;
@@ -11,6 +12,7 @@ public class BillController {
 
 	private BillingService billService = null;
 	
+	@Inject
 	public BillController(BillingService billService) {
 		this.billService = billService;
 		
