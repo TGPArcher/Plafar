@@ -53,6 +53,16 @@ public final class PageHandler {
 			screenContent.getChildren().add(activePage.getContents());
 		}
 		
-		return new Scene(screenContent, 900, 600);
+		double width = 900;
+		double height = 600;
+		if(_stage != null) {
+			Scene currentScene = _stage.getScene();
+			if(currentScene != null) {
+				width = currentScene.getWidth();
+				height = currentScene.getHeight();
+			}
+		}
+		
+		return new Scene(screenContent, width, height);
 	}
 }
