@@ -1,6 +1,8 @@
 package plafar.logic;
+
 import java.util.LinkedList;
 import java.util.List;
+import com.google.inject.Inject;
 import plafar.domain.Bill;
 import plafar.domain.StoreItem;
 import plafar.logic.abstractions.ShopingServices;
@@ -10,6 +12,7 @@ public class ShopServices implements ShopingServices {
 
 	Persistent<StoreItem> itemRepository = null;
 	
+	@Inject
 	public ShopServices(Persistent<StoreItem> itemRepository) {
 		this.itemRepository = itemRepository;
 	}

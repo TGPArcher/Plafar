@@ -1,5 +1,7 @@
 package plafar.logic;
+
 import java.util.List;
+import com.google.inject.Inject;
 import plafar.domain.Bill;
 import plafar.logic.abstractions.BillingService;
 import plafar.persistence.abastractions.Persistent;
@@ -8,6 +10,7 @@ public class BillServices implements BillingService {
 	
 	private Persistent<Bill> billRepository = null;
 	
+	@Inject
 	public BillServices(Persistent<Bill> billRepository) {
 		this.billRepository = billRepository;
 	}
