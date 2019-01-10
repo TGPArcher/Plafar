@@ -72,6 +72,7 @@ public class SellPage extends Page {
 		grid3.setAlignment(Pos.CENTER);
 		
 		VBox pageContents = new VBox(10, nameBox, grid1, grid2, grid3);
+		HBox.setHgrow(pageContents, Priority.ALWAYS);
 		
 		return pageContents;
 	}

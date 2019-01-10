@@ -44,6 +44,7 @@ public class ItemPage extends Page{
 		
 		VBox grid1 = new VBox(nameLabel, name, descriptionLabel, description);
 		grid1.setPadding(new Insets(5, 2.5, 5, 5));
+		HBox.setHgrow(grid1, Priority.ALWAYS);
 		
 		Label priceLabel = new Label("Price:");
 		price = new TextField("");
@@ -54,6 +55,7 @@ public class ItemPage extends Page{
 		
 		VBox grid2 = new VBox(priceLabel, price, quantityLabel, quantity);
 		grid2.setPadding(new Insets(5, 5, 5, 2.5));
+		HBox.setHgrow(grid2, Priority.ALWAYS);
 		HBox grid = new HBox(grid1, grid2);
 		
 		Button addBtn = new Button("Add");
@@ -72,9 +74,10 @@ public class ItemPage extends Page{
 		HBox btns = new HBox(5, addBtn, cancelBtn);
 		btns.setAlignment(Pos.CENTER);
 		
-		return new VBox(drawTitle(),
-						grid,
-						btns);
+		VBox pageContents =  new VBox(drawTitle(), grid, btns);
+		HBox.setHgrow(pageContents, Priority.ALWAYS);
+		
+		return pageContents;
 	}
 	
 	private StoreItem getItem() {

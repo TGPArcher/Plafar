@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -26,7 +27,14 @@ public class MenuPage extends Page {
 	@Override
 	protected Parent doContents() {
 		// logo
-		addImage("file:C:/Users/TGP/Desktop/icon-herb.png", true);
+		addImage("file:C:/Users/TGP/Desktop/icon-herb.png", false);
+		
+		// app name
+		BorderPane namePane = new BorderPane();
+		Label appName = new Label("Plafar");
+		namePane.setCenter(appName);
+		pageContent.getChildren().add(namePane);
+		addSeparator();
 		
 		// store list page
 		storeBtn = addButton("Store", "file:C:/Users/TGP/Desktop/listsm.png", true);
@@ -45,14 +53,19 @@ public class MenuPage extends Page {
 		pageContent.getChildren().add(sep);
 	}
 	
-	private ImageView getImage(String graphicPath) {
+	private ImageView getImage(String graphicPath, int width, int height, boolean preserveRatio) {
 		ImageView img = new ImageView(graphicPath);
-		img.setFitWidth(100);
-        img.setPreserveRatio(true);
+		img.setPreserveRatio(preserveRatio);
+		img.setFitWidth(width);
+		img.setFitHeight(height);
         img.setSmooth(true);
         img.setCache(true);
         
         return img;
+	}
+	
+	private ImageView getImage(String graphicPath) {
+		return getImage(graphicPath, 50, 50, true);
 	}
 	
 	private void addImage(String graphicPath, boolean separator) {
