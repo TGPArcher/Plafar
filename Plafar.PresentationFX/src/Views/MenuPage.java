@@ -27,7 +27,7 @@ public class MenuPage extends Page {
 	@Override
 	protected Parent doContents() {
 		// logo
-		addImage("file:C:/Users/TGP/Desktop/icon-herb.png", false);
+		addImage("file:resources/icons/plafar_logo_icon.png", false);
 		
 		// app name
 		BorderPane namePane = new BorderPane();
@@ -37,10 +37,10 @@ public class MenuPage extends Page {
 		addSeparator();
 		
 		// store list page
-		storeBtn = addButton("Store", "file:C:/Users/TGP/Desktop/listsm.png", true);
+		storeBtn = addButton("Store", "file:resources/icons/store_icon.png", true);
 		
 		// bill list page
-		billBtn = addButton("Bill history", "file:C:/Users/TGP/Desktop/listsm.png", false);
+		billBtn = addButton("Bill history", "file:resources/icons/history_icon.png", false);
 		
 		
 		return pageContent;
@@ -55,11 +55,11 @@ public class MenuPage extends Page {
 	
 	private ImageView getImage(String graphicPath, int width, int height, boolean preserveRatio) {
 		ImageView img = new ImageView(graphicPath);
+		img.setSmooth(true);
+        img.setCache(true);
 		img.setPreserveRatio(preserveRatio);
 		img.setFitWidth(width);
 		img.setFitHeight(height);
-        img.setSmooth(true);
-        img.setCache(true);
         
         return img;
 	}
