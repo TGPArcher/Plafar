@@ -1,4 +1,4 @@
-package plafar.persistence.abastractions;
+package plafar.persistence.abstractions;
 
 import java.util.List;
 
