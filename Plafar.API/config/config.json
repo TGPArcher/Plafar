@@ -1,0 +1,4 @@
+{
+"Logic":"Plafar.Logic.Services",
+"Persistence":"Plafar.Persistence.SQLite"
+}
