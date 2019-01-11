@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import plafar.domain.StoreItem;
-import plafar.persistence.abastractions.Persistent;
+import plafar.persistence.abstractions.Persistent;
 
 public class ItemRepository implements Persistent<StoreItem> {
 	

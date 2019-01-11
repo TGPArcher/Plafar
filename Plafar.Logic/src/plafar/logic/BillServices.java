@@ -4,7 +4,7 @@ import java.util.List;
 import com.google.inject.Inject;
 import plafar.domain.Bill;
 import plafar.logic.abstractions.BillingService;
-import plafar.persistence.abastractions.Persistent;
+import plafar.persistence.abstractions.Persistent;
 
 public class BillServices implements BillingService {
 	

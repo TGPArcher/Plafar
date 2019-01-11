@@ -6,7 +6,7 @@ import com.google.inject.Inject;
 import plafar.domain.Bill;
 import plafar.domain.StoreItem;
 import plafar.logic.abstractions.ShopingServices;
-import plafar.persistence.abastractions.Persistent;
+import plafar.persistence.abstractions.Persistent;
 
 public class ShopServices implements ShopingServices {
 

@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
 import plafar.domain.Bill;
-import plafar.persistence.abastractions.Persistent;
+import plafar.persistence.abstractions.Persistent;
 
 public class BillRepository implements Persistent<Bill> {
 	
