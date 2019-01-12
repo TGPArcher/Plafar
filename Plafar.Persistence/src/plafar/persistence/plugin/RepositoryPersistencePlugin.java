@@ -3,6 +3,7 @@ package plafar.persistence.plugin;
 import plafar.domain.*;
 import plafar.persistence.BillRepository;
 import plafar.persistence.ItemRepository;
+import plafar.persistence.SQLiteHelper;
 import plafar.persistence.abstractions.Persistent;
 import plafar.persistence.abstractions.plugin.PlugablePersistence;
 
@@ -31,6 +32,19 @@ public class RepositoryPersistencePlugin implements PlugablePersistence{
 	@Override
 	public Class<? extends Persistent<StoreItem>> getItemPersistenceClass() {
 		return ItemRepository.class;
+	}
+
+	@Override
+	public void intitialize() {
+		SQLiteHelper.setExternalJarName("sqlite-jdbc-3.23.1.jar");
+		SQLiteHelper.setExternal(true);
+		
+		if(SQLiteHelper.getConnection() == null) {
+			System.err.println("Plafar.Persistence.SQLite failed to initialize");
+		}
+		else {
+			System.out.println("Plafar.Persistence.SQLite is initialized");			
+		}
 	}
 
 }
