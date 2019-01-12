@@ -31,4 +31,10 @@ public class ServicesLogicPlugin implements PlugableLogic{
 		return ShopServices.class;
 	}
 
+	@Override
+	public void intitialize() {
+		// no initialization required
+		System.out.println("Plafar.Logic.Services is initialized");
+	}
+
 }

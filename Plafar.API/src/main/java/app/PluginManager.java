@@ -45,6 +45,13 @@ public final class PluginManager {
 		
 		logicPlugin = new PluginLoader<PlugableLogic>(PlugableLogic.class, pluginDirectoryPath).getPlugin();
 		persistencePlugin = new PluginLoader<PlugablePersistence>(PlugablePersistence.class, pluginDirectoryPath).getPlugin();
+		
+		initPlugins();
+	}
+	
+	private static void initPlugins() {
+		logicPlugin.intitialize();
+		persistencePlugin.intitialize();
 	}
 	
 	public static PlugableLogic getLogicPlugin() {
