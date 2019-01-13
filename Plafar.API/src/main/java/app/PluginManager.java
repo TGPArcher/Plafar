@@ -20,7 +20,7 @@ public final class PluginManager {
 		configuration = new Hashtable<String, String>();
 		
 		try {
-			String configPath = System.getProperty("user.dir") + "/config/" + fileName;
+			String configPath = System.getProperty("user.dir") + "\\config\\" + fileName;
 			
 			byte[] encoded = Files.readAllBytes(Paths.get(configPath));
 			String configContents = new String(encoded, StandardCharsets.UTF_8);
@@ -41,7 +41,7 @@ public final class PluginManager {
 	}
 	
 	public static void loadPlugins() {
-		String pluginDirectoryPath = System.getProperty("user.dir") + "/plugins";
+		String pluginDirectoryPath = System.getProperty("user.dir") + "\\plugins";
 		
 		logicPlugin = new PluginLoader<PlugableLogic>(PlugableLogic.class, pluginDirectoryPath).getPlugin();
 		persistencePlugin = new PluginLoader<PlugablePersistence>(PlugablePersistence.class, pluginDirectoryPath).getPlugin();

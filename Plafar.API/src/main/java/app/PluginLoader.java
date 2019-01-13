@@ -49,11 +49,12 @@ public class PluginLoader<T extends Plugable> {
 		T _plugin = null;
 		try {
 			URI jarUri = jar.toURI();
-			ClassLoader loader = URLClassLoader.newInstance(new URL[] {jarUri.toURL()});
+			ClassLoader loader = URLClassLoader.newInstance(new URL[] {jarUri.toURL()}, getClass().getClassLoader());
 			List<String> classesInJar = getJarClasses(jar.getAbsolutePath());
 			
 			for(String className : classesInJar) {
 				Class<?> currentClass = Class.forName(className, true, loader);
+				
 				if(type.isAssignableFrom(currentClass)) {
 					T currentPlugin = (T) currentClass.getConstructor().newInstance();
 					
