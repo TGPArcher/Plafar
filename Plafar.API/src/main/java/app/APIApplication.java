@@ -29,5 +29,39 @@ public class APIApplication {
 		// retrieving port
 		awaitInitialization();
 		_port = port();
+		
+		// listening to commands
+		listening();
+		
+		// stoping the program
+		stop();
+		System.exit(0);
+	}
+	
+	private void listening() {
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.println("listening...");
+		while(true) {
+			String command = scanner.nextLine();
+			
+			if (analyzeCommand(command)) {
+				break;
+			}
+		}
+		
+		scanner.close();
+	}
+	
+	private boolean analyzeCommand(String command) {
+		if(command.equals("port")) {
+			System.out.println(_port);
+		}
+		if(command.equals("shutdown")) {
+			System.out.println("Shutting down!");
+			return true;
+		}
+		
+		return false;
 	}
 }
