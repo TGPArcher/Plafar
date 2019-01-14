@@ -1,7 +1,6 @@
 package app;
 
 import static spark.Spark.*;
-import java.util.Scanner;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import controllers.BillController;
@@ -39,18 +38,23 @@ public class APIApplication {
 	}
 	
 	private void listening() {
-		Scanner scanner = new Scanner(System.in);
-		
-		System.out.println("listening...");
 		while(true) {
-			String command = scanner.nextLine();
-			
-			if (analyzeCommand(command)) {
-				break;
+			try {
+				int n = System.in.available();
+				if(n > 0) {
+					byte[] buffer = new byte[100];
+					System.in.read(buffer, 0, Math.min(n, buffer.length));
+					
+					String command = new String(buffer, 0, n);
+					if (analyzeCommand(command)) {
+						break;
+					}
+				}
+			}
+			catch(Exception e) {
+				// We have nothing to do with an exception here :(
 			}
 		}
-		
-		scanner.close();
 	}
 	
 	private boolean analyzeCommand(String command) {
@@ -60,6 +64,9 @@ public class APIApplication {
 		if(command.equals("shutdown")) {
 			System.out.println("Shutting down!");
 			return true;
+		}
+		if(command.equals("ready")) {
+			System.out.println("true");
 		}
 		
 		return false;
