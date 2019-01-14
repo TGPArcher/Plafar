@@ -4,5 +4,5 @@ public interface Plugable {
 	String getName();
 	String getKey();
 	String getVersion();
-	void intitialize();
+	void intitialize(String args[]);
 }

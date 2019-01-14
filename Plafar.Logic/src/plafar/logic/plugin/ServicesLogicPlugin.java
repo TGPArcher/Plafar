@@ -32,7 +32,7 @@ public class ServicesLogicPlugin implements PlugableLogic{
 	}
 
 	@Override
-	public void intitialize() {
+	public void intitialize(String args[]) {
 		// no initialization required
 		System.out.println("Plafar.Logic.Services is initialized");
 	}
