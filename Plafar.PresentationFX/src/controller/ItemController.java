@@ -4,6 +4,8 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+
+import app.APIHandler;
 import plafar.domain.StoreItem;
 import response.ResponseStatement;
 import util.JsonUtil;
@@ -20,7 +22,7 @@ public final class ItemController {
 		StoreItem item = null;
 		
 		try {
-			HttpResponse<JsonNode> jsonResponse = Unirest.get("http://localhost:5000/api/items/{id}")
+			HttpResponse<JsonNode> jsonResponse = Unirest.get(APIHandler.getApiRoute() + "/items/{id}")
 					.header("accept", "application/json")
 					.routeParam("id", String.valueOf(id))
 					.asJson();
@@ -51,7 +53,7 @@ public final class ItemController {
 		}
 		
 		try {
-			HttpResponse<JsonNode> jsonResponse = Unirest.post("http://localhost:5000/api/items/add")
+			HttpResponse<JsonNode> jsonResponse = Unirest.post(APIHandler.getApiRoute() + "/items/add")
 					.header("accept", "application/json")
 					.body(JsonUtil.toJson(item))
 					.asJson();
@@ -90,7 +92,7 @@ public final class ItemController {
 		}
 		
 		try {
-			HttpResponse<JsonNode> jsonResponse = Unirest.put("http://localhost:5000/api/items/edit")
+			HttpResponse<JsonNode> jsonResponse = Unirest.put(APIHandler.getApiRoute() + "/items/edit")
 					.header("accept", "application/json")
 					.body(JsonUtil.toJson(item))
 					.asJson();
@@ -135,7 +137,7 @@ public final class ItemController {
 		}
 		
 		try {
-			HttpResponse<JsonNode> jsonResponse = Unirest.delete("http://localhost:5000/api/items/delete/{id}")
+			HttpResponse<JsonNode> jsonResponse = Unirest.delete(APIHandler.getApiRoute() + "/items/delete/{id}")
 					.header("accept", "application/json")
 					.routeParam("id", String.valueOf(item.getId()))
 					.asJson();

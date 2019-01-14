@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import com.mashape.unirest.http.*;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import app.APIHandler;
 import plafar.domain.Bill;
 import plafar.domain.StoreItem;
 import util.JsonUtil;
@@ -38,7 +39,7 @@ public final class StoreController {
 	
 	public static void sellItem(StoreItem item, int quantity) {
 		try {
-			HttpResponse<JsonNode> jsonResponse = Unirest.put("http://localhost:5000/api/items/sell/{quantity}")
+			HttpResponse<JsonNode> jsonResponse = Unirest.put(APIHandler.getApiRoute() + "/items/sell/{quantity}")
 					.header("accept", "application/json")
 					.routeParam("quantity", String.valueOf(quantity))
 					.body(JsonUtil.toJson(item))
@@ -79,7 +80,7 @@ public final class StoreController {
 		}
 		
 		try {
-			HttpResponse<JsonNode> jsonResponse = Unirest.get("http://localhost:5000/api/items" + itemPath)
+			HttpResponse<JsonNode> jsonResponse = Unirest.get(APIHandler.getApiRoute() + "/items" + itemPath)
 					  .header("accept", "application/json")
 					  .asJson();
 			

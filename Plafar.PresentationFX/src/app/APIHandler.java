@@ -20,6 +20,10 @@ public final class APIHandler {
 		return port;
 	}
 	
+	public static String getApiRoute() {
+		return "http://localhost:" + getPort() + "/api";
+	}
+	
 	public static void start() {
 		try {
 			ProcessBuilder pb = new ProcessBuilder("java", "-jar", "./api/Plafar_API.jar");

@@ -10,6 +10,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import app.APIHandler;
 import plafar.domain.Bill;
 import plafar.domain.StoreItem;
 import response.ResponseStatement;
@@ -31,7 +32,7 @@ public final class BillController {
 	
 	public static void addBill(Bill bill) {
 		try {
-			HttpResponse<JsonNode> jsonResponse = Unirest.post("http://localhost:5000/api/bills/add")
+			HttpResponse<JsonNode> jsonResponse = Unirest.post(APIHandler.getApiRoute() + "/bills/add")
 					.header("accept", "application/json")
 					.body(JsonUtil.toJson(bill))
 					.asJson();
@@ -64,7 +65,7 @@ public final class BillController {
 	
 	public static void deleteBill(Bill bill) {
 		try {
-			HttpResponse<JsonNode> jsonResponse = Unirest.delete("http://localhost:5000/api/bills/delete/{billId}")
+			HttpResponse<JsonNode> jsonResponse = Unirest.delete(APIHandler.getApiRoute() + "/bills/delete/{billId}")
 					.header("accept", "application/json")
 					.routeParam("billId", String.valueOf(bill.getId()))
 					.asJson();
@@ -95,7 +96,7 @@ public final class BillController {
 		List<Bill> bills = new LinkedList<Bill>();
 		
 		try {
-			HttpResponse<JsonNode> jsonResponse = Unirest.get("http://localhost:5000/api/bills")
+			HttpResponse<JsonNode> jsonResponse = Unirest.get(APIHandler.getApiRoute() + "/bills")
 					  .header("accept", "application/json")
 					  .asJson();
 			
