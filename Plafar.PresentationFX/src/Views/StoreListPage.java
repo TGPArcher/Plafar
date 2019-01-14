@@ -95,11 +95,11 @@ public class StoreListPage extends Page{
 		HBox itemPane = new HBox(10);
 		itemPane.setAlignment(Pos.CENTER);
 		
-		Label name = new Label(item.getName());
+		Label name = new Label(item.getName().substring(0, Math.min(25, item.getName().length())));
 		name.setAlignment(Pos.CENTER);
 		itemPane.getChildren().add(name);
 		
-		Label description = new Label(item.getDescription());
+		Label description = new Label(item.getDescription().substring(0, Math.min(50, item.getDescription().length())));
 		itemPane.getChildren().add(description);
 		
 		Region btnRegion = new Region();
