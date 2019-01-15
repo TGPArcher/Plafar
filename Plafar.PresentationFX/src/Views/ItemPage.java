@@ -1,8 +1,8 @@
 package views;
 
-import Formatters.UnsignedDecimalFormatter;
-import Formatters.UnsignedIntegerFormatter;
 import controller.ItemController;
+import formatters.UnsignedDecimalFormatter;
+import formatters.UnsignedIntegerFormatter;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -10,20 +10,45 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import plafar.domain.StoreItem;
 
+/**
+ * ItemPage is a view class responsible for creating the page where a item can be created or edited
+ */
 public class ItemPage extends Page{
+	/**
+	 * The item displayed on the page
+	 */
 	protected StoreItem item = null;
 	
+	/**
+	 * A text filed containing the item's name
+	 */
 	private TextField name = null;
+	/**
+	 * A text filed containing the item's description
+	 */
 	private TextArea description = null;
+	/**
+	 * A text filed containing the item's price
+	 */
 	private TextField price = null;
+	/**
+	 * A text filed containing the item's quantity
+	 */
 	private TextField quantity = null;
 	
+	/**
+	 * Initializes a Add Item page
+	 */
 	public ItemPage() {
 		setTitle("Add Item");
 		item = new StoreItem();
 		contents = doContents();
 	}
 	
+	/**
+	 * Initializes a Edit Item page
+	 * @param item - the item to be edited
+	 */
 	public ItemPage(StoreItem item) {
 		if(item == null) {
 			return;
@@ -58,7 +83,13 @@ public class ItemPage extends Page{
 		HBox.setHgrow(grid2, Priority.ALWAYS);
 		HBox grid = new HBox(grid1, grid2);
 		
-		Button addBtn = new Button("Add");
+		Button addBtn;
+		if(getTitle().equals("Add Item")) {
+			addBtn = new Button("Add");
+		}
+		else {
+			addBtn = new Button("Edit");
+		}
 		addBtn.setOnAction((event) -> {
 			if(getTitle() == "Add Item") {
 				ItemController.addItem(getItem());
@@ -80,6 +111,10 @@ public class ItemPage extends Page{
 		return pageContents;
 	}
 	
+	/**
+	 * This method is used to map the contents of the page to a StoreItem object
+	 * @return StoreItem - the item with mapped that from the page
+	 */
 	private StoreItem getItem() {
 		try {
 			item.setName(name.getText());
@@ -95,6 +130,9 @@ public class ItemPage extends Page{
 		return item;
 	}
 	
+	/**
+	 * This method is used on a Edit Item page to fill the text fields with current item details
+	 */
 	private void fillPage() {
 		try {
 			if(item.getName() != null) {

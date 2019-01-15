@@ -10,10 +10,21 @@ import java.util.List;
 import plafar.domain.Bill;
 import plafar.persistence.abstractions.Persistent;
 
+/**
+ * BillRepository is a class responsible of persisting Bills. It uses the repository architecture where a repository is responsible of
+ * every persistence related action for a specific type of objects.
+ * The persistence part is done using SQLite database
+ */
 public class BillRepository implements Persistent<Bill> {
-	
+	/**
+	 * This is the connection to the database
+	 */
 	private Connection connection = null;
 	
+	/**
+	 * Initializes the BillRepository.
+	 * Initialization implies getting the connection to the database and creating the tables
+	 */
 	public BillRepository() {
 		connection = SQLiteHelper.getConnection();
 		initTable(connection);
@@ -130,6 +141,10 @@ public class BillRepository implements Persistent<Bill> {
 		return bills;
 	}
 	
+	/**
+	 * This method is used to assure that if a table is not existent it will create it before the program starts
+	 * @param connection - the connection to the database
+	 */
 	private static void initTable(Connection conn) {
 		String sql = "CREATE TABLE IF NOT EXISTS bills (\n"
                 + "	id integer PRIMARY KEY AUTOINCREMENT,\n"

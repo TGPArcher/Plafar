@@ -11,11 +11,23 @@ import javafx.scene.layout.VBox;
 import plafar.domain.Bill;
 import plafar.domain.StoreItem;
 
+/**
+ * DeleteBillPage is a view class responsible for creating the confirmation page for deleting bills 
+ */
 public class DeleteBillPage extends Page{
-	
+	/**
+	 * The bill to be deleted
+	 */
 	private Bill bill = null;
+	/**
+	 * The item from the bill
+	 */
 	private StoreItem billItem = null;
 	
+	/**
+	 * Initializes DeleteBillPage with the bill to delete
+	 * @param bill - bill to be deleted
+	 */
 	public DeleteBillPage(Bill bill) {
 		if(bill == null) {
 			return;
@@ -63,5 +75,4 @@ public class DeleteBillPage extends Page{
 		HBox.setHgrow(content, Priority.ALWAYS);
 		return content;
 	}
-
 }

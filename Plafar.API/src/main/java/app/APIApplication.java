@@ -6,10 +6,20 @@ import com.google.inject.Injector;
 import controllers.BillController;
 import controllers.ShopController;
 
+/**
+ * APIApplication is the backbone of the API.
+ * The class is responsible for putting application's pieces together like:
+ * Finding a free port, loading the plugins, setting the Injector, creating the controllers and listening to commands
+ */
 public class APIApplication {
-	
+	/**
+	 * This is the port on which the API will listen
+	 */
 	private int _port = 0;
 	
+	/**
+	 * The "main" method of the application, here are the modules are initialized and called sequentially
+	 */
 	public void run() {
 		// starting the server on a free port
 		port(0);
@@ -37,6 +47,11 @@ public class APIApplication {
 		System.exit(0);
 	}
 	
+	/**
+	 * This method is responsible of waiting for input from other processes in the System.in
+	 * identifying the input and passing it for analyzing.
+	 * Note: this is a loop which is stopped only by the "shutdown" command
+	 */
 	private void listening() {
 		while(true) {
 			try {
@@ -57,6 +72,11 @@ public class APIApplication {
 		}
 	}
 	
+	/**
+	 * This method is responsible for command analyzing and executing command's associated functionality/response
+	 * @param command - the command being analyzed
+	 * @return boolean - whether or not the program should stop
+	 */
 	private boolean analyzeCommand(String command) {
 		if(command.equals("port")) {
 			System.out.println(_port);

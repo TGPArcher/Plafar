@@ -16,21 +16,54 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import plafar.domain.StoreItem;
 
+/**
+ * StoreListPage is a view class responsible for creating and displaying the list of items from the store
+ */
 public class StoreListPage extends Page{
-	// pref data to be persisted during one session;
+	/**
+	 * Session persistent data about the available checkbox
+	 */
 	public static boolean prefAvailable = true;
+	/**
+	 * Session persistent data about the unavailable checkbox
+	 */
 	public static boolean prefUnavailable = true;
 	
+	/**
+	 * The list of items to be displayed
+	 */
 	private List<StoreItem> items = null;
+	/**
+	 * The list of containers displaying items
+	 */
 	private ListView<HBox> list = null;
 	
+	/**
+	 * The button used to add a new item to the store
+	 */
 	private Button addBtn = null;
+	/**
+	 * The button used to edit a selected item from the store
+	 */
 	private Button editBtn = null;
+	/**
+	 * The button used to delete a selecte item from teh store
+	 */
 	private Button deleteBtn = null;
 	
+	/**
+	 * The checkbox handling the available items
+	 */
 	private CheckBox available = null;
+	/**
+	 * The checkbox handling the unavailable items
+	 */
 	private CheckBox unavailable = null;
 	
+	/**
+	 * Initializes the page with the items to be displayed
+	 * @param items - items to be displayed
+	 */
 	public StoreListPage(List<StoreItem> items) {
 		if(items == null) {
 			this.items = new LinkedList<StoreItem>();
@@ -44,6 +77,11 @@ public class StoreListPage extends Page{
 		setItemButtonsAction();
 	}
 	
+	/**
+	 * This method is used to create the upper part of the page.
+	 * Containing the the control buttons and checkboxes
+	 * @return Pane - the parent container of the upper part of the page
+	 */
 	private Pane drawHeader() {
 		available = new CheckBox("Available");
 		available.setSelected(true);
@@ -72,6 +110,10 @@ public class StoreListPage extends Page{
 		return new VBox(headerPane, new Separator());
 	}
 	
+	/**
+	 * This method is used to create a ListView off all the items
+	 * @return ListView - a list view containg cells with all the items
+	 */
 	private ListView<HBox> drawItemList() {
 		ObservableList<HBox> itemsBox = FXCollections.observableArrayList();
 		for(int i = 0; i < items.size(); i++) {
@@ -83,7 +125,7 @@ public class StoreListPage extends Page{
 		list.getSelectionModel().selectedItemProperty().addListener(
 	            new ChangeListener<HBox>() {
 	                public void changed(ObservableValue<? extends HBox> ov, HBox old_val, HBox new_val) {
-	                	setDisableControllButtons(false);
+	                	setDisableControlButtons(false);
 	                }
 	            });
 		
@@ -91,6 +133,11 @@ public class StoreListPage extends Page{
 		return list;
 	}
 	
+	/**
+	 * This method is used to create the container which holds a item's data
+	 * @param item - the item to be displayed
+	 * @return HBox - the parent container of the item
+	 */
 	private HBox drawItem(StoreItem item) {
 		HBox itemPane = new HBox(10);
 		itemPane.setAlignment(Pos.CENTER);
@@ -119,6 +166,9 @@ public class StoreListPage extends Page{
 		return itemPane;
 	}
 	
+	/**
+	 * This method is used to bind checkboxes to their actions
+	 */
 	private void setCheckBoxAction() {
 		available.setSelected(prefAvailable);
 		unavailable.setSelected(prefUnavailable);
@@ -134,6 +184,9 @@ public class StoreListPage extends Page{
 		});
 	}
 	
+	/**
+	 * This method is used to bind control buttons with their actions
+	 */
 	private void setItemButtonsAction() {
 		addBtn.setOnAction((event) -> {
 			ItemController.setAddItemPage();
@@ -158,7 +211,11 @@ public class StoreListPage extends Page{
 		});
 	}
 	
-	private void setDisableControllButtons(boolean val) {
+	/**
+	 * This method is used to enable/disable control buttons
+	 * @param val - true - disables the buttons, false - enables the buttons
+	 */
+	private void setDisableControlButtons(boolean val) {
 		editBtn.setDisable(val);
         deleteBtn.setDisable(val);
 	}
@@ -171,6 +228,10 @@ public class StoreListPage extends Page{
 		return pageContent;
 	}
 	
+	/**
+	 * This method is used to retrieve the currently selected item
+	 * @return StoreItem - the selected item
+	 */
 	public StoreItem getSelectedItem() {
 		int index = list.getSelectionModel().getSelectedIndex();
 		if(index == -1) {

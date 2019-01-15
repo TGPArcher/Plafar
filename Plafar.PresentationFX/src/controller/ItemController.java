@@ -11,13 +11,25 @@ import response.ResponseStatement;
 import util.JsonUtil;
 import views.*;
 
+/**
+ * ItemController is a controller class responsible for managing the view classes which operate with items.
+ * Makes requests to the api. Gets data and sends it to views. Listens to views inputs an act accordingly. 
+ */
 public final class ItemController {
+	/**
+	 * This method is used to set AddItemPage as application's active page
+	 */
 	public static void setAddItemPage() {
 		PageHandler.setMenu(new MenuPage());
 		PageHandler.setActivePage(new ItemPage());
 		PageHandler.show();
 	}
 	
+	/**
+	 * This method is used to make a request at the api to retrieve a specific item from the store
+	 * @param id - the id of the item
+	 * @return StoreItem - the item
+	 */
 	public static StoreItem getItem(int id) {
 		StoreItem item = null;
 		
@@ -47,6 +59,10 @@ public final class ItemController {
 		return item;
 	}
 	
+	/**
+	 * This method is used to make a request at the api to add a new item to the store
+	 * @param item - the new item to be added
+	 */
 	public static void addItem(StoreItem item) {
 		if(item == null) {
 			return;
@@ -76,6 +92,10 @@ public final class ItemController {
 		back();
 	}
 	
+	/**
+	 * This method is used to set EditItemPage as application's active page
+	 * @param item - the item to be edited on the page
+	 */
 	public static void setEditItemPage(StoreItem item) {
 		if(item == null) {
 			return;
@@ -86,6 +106,10 @@ public final class ItemController {
 		PageHandler.show();
 	}
 	
+	/**
+	 * This method is used to make a request at the api to edit an existent item from the store
+	 * @param item - the edited item
+	 */
 	public static void editItem(StoreItem item) {
 		if(item == null) {
 			return;
@@ -121,6 +145,10 @@ public final class ItemController {
 		back();
 	}
 	
+	/**
+	 * This method is used to set DeleteItemPage as application's active page
+	 * @param item - item to be deleted
+	 */
 	public static void setDeleteItemPage(StoreItem item) {
 		if(item == null) {
 			return;
@@ -131,6 +159,10 @@ public final class ItemController {
 		PageHandler.show();
 	}
 	
+	/**
+	 * This method is used to make a request at the api to delete an existing item from the store
+	 * @param item - the item to be deleted
+	 */
 	public static void deleteItem(StoreItem item) {
 		if(item == null) {
 			return;
@@ -162,6 +194,10 @@ public final class ItemController {
 		back();
 	}
 	
+	/**
+	 * This method is used to go to the last page.
+	 * Which in the context if ItemController means setting the StoreListPage as application's active page
+	 */
 	public static void back() {
 		StoreController.setStorePage();
 	}

@@ -6,10 +6,19 @@ import plafar.domain.Bill;
 import plafar.logic.abstractions.BillingService;
 import plafar.persistence.abstractions.Persistent;
 
+/**
+ * BillServices is a implementation of BillingService using the services architecture for the store.
+ */
 public class BillServices implements BillingService {
-	
+	/**
+	 * This is the access point to the database where the service data is persisted
+	 */
 	private Persistent<Bill> billRepository = null;
 	
+	/**
+	 * Initializes the service with dependency injection, injecting the database layer
+	 * @param billRepository - a persistence class which implements the Persistent< Bill >
+	 */
 	@Inject
 	public BillServices(Persistent<Bill> billRepository) {
 		this.billRepository = billRepository;

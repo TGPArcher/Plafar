@@ -10,10 +10,21 @@ import java.util.List;
 import plafar.domain.StoreItem;
 import plafar.persistence.abstractions.Persistent;
 
+/**
+ * ItemRepository is a class responsible of persisting StoreItems. It uses the repository architecture where a repository is responsible of
+ * every persistence related action for a specific type of objects.
+ * The persistence part is done using SQLite database
+ */
 public class ItemRepository implements Persistent<StoreItem> {
-	
+	/**
+	 * This is the connection to the database
+	 */
 	Connection connection = null;
 	
+	/**
+	 * Initializes the ItemRepository.
+	 * Initialization implies getting the connection to the database and creating the tables
+	 */
 	public ItemRepository() {
 		connection = SQLiteHelper.getConnection();
 		initTable(connection);
@@ -130,6 +141,10 @@ public class ItemRepository implements Persistent<StoreItem> {
 		return items;
 	}
 	
+	/**
+	 * This method is used to assure that if a table is not existent it will create it before the program starts
+	 * @param connection - the connection to the database
+	 */
 	private static void initTable(Connection connection) {
 		String sql = "CREATE TABLE IF NOT EXISTS items (\n"
 				+ " id integer PRIMARY KEY AUTOINCREMENT,\n"

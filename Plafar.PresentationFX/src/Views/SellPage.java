@@ -1,7 +1,7 @@
 package views;
 
-import Formatters.UnsignedIntegerFormatter;
 import controller.StoreController;
+import formatters.UnsignedIntegerFormatter;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -9,19 +9,32 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import plafar.domain.StoreItem;
 
+/**
+ * SellPage is a view class responsible for creating the confirmation page for item selling
+ */
 public class SellPage extends Page {
+	/**
+	 * The item being sold
+	 */
 	private StoreItem item = null;
 	
+	/**
+	 * TextField containing quantity of items being sold
+	 */
 	private TextField sellField = null;
+	/**
+	 * The button to confirm the transaction
+	 */
 	private Button sellBtn = null;
+	/**
+	 * The button to reject the transaction
+	 */
 	private Button cancelBtn = null;
 	
-	// testing only
-	public SellPage() {
-		this.item = new StoreItem(0, "Patlagina", "Cel mai bun", 3.56f, 8);
-		contents = doContents();
-	}
-	
+	/**
+	 * Initializes the page with the item being sold
+	 * @param item - the item being sold
+	 */
 	public SellPage(StoreItem item) {
 		this.item = item;
 		contents = doContents();
@@ -77,6 +90,11 @@ public class SellPage extends Page {
 		return pageContents;
 	}
 	
+	/**
+	 * This method is used to calculate the total cost of the sale
+	 * @param count - number of items
+	 * @return String - a string value of the total cost
+	 */
 	private String getTotalCost(String count) {
 		try {
 			int newCount = Integer.parseInt(count);
@@ -89,6 +107,9 @@ public class SellPage extends Page {
 		}
 	}
 	
+	/**
+	 * This method is used to bind the sell button with his action
+	 */
 	private void setSellBtnAction() {
 		sellBtn.setOnAction((event) -> {
 			int quantity = 0;
@@ -104,10 +125,12 @@ public class SellPage extends Page {
 		});
 	}
 	
+	/**
+	 * This method is used to bind the cancel button with his action
+	 */
 	private void setCancelBtnAction() {
 		cancelBtn.setOnAction((event) -> {
 			StoreController.setStorePage();
 		});
 	}
-
 }

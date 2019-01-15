@@ -4,6 +4,9 @@ import plafar.logic.*;
 import plafar.logic.abstractions.*;
 import plafar.logic.abstractions.plugin.PlugableLogic;
 
+/**
+ * This is the implementation of PlugableLogic for the Logic Services plugin containing data about plugin, methods to initialize the plugin and also to retrieve the functionality
+ */
 public class ServicesLogicPlugin implements PlugableLogic{
 
 	@Override
@@ -30,7 +33,7 @@ public class ServicesLogicPlugin implements PlugableLogic{
 	public Class<? extends ShopingServices> getShopingServiceClass() {
 		return ShopServices.class;
 	}
-
+	
 	@Override
 	public void intitialize(String args[]) {
 		// no initialization required

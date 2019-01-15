@@ -17,8 +17,14 @@ import response.ResponseStatement;
 import util.JsonUtil;
 import views.*;
 
+/**
+ * BillController is a controller class responsible for managing the view classes which operate with bills.
+ * Makes requests to the api. Gets data and sends it to views. Listens to views inputs an act accordingly. 
+ */
 public final class BillController {
-	
+	/**
+	 * This method is used to set the BillListPage as the application's active page
+	 */
 	public static void setBillPage() {
 		List<Bill> bills = getBills();
 		
@@ -30,6 +36,10 @@ public final class BillController {
 		PageHandler.show();
 	}
 	
+	/**
+	 * This method is used to make a request at the api to add a new bill
+	 * @param bill - the bill to be added
+	 */
 	public static void addBill(Bill bill) {
 		try {
 			HttpResponse<JsonNode> jsonResponse = Unirest.post(APIHandler.getApiRoute() + "/bills/add")
@@ -53,6 +63,10 @@ public final class BillController {
 		}
 	}
 	
+	/**
+	 * This method is used to set DeleteBillPage as application's active page
+	 * @param bill - the bill to be deleted
+	 */
 	public static void setDeleteBillPage(Bill bill) {
 		if(bill == null) {
 			return;
@@ -63,6 +77,10 @@ public final class BillController {
 		PageHandler.show();
 	}
 	
+	/**
+	 * This method is used to make a request at the api to delete a existing bill.
+	 * @param bill - the bill to be deleted
+	 */
 	public static void deleteBill(Bill bill) {
 		try {
 			HttpResponse<JsonNode> jsonResponse = Unirest.delete(APIHandler.getApiRoute() + "/bills/delete/{billId}")
@@ -88,10 +106,19 @@ public final class BillController {
 		setBillPage();
 	}
 	
+	/**
+	 * This method is used to get the item and its data from a bill
+	 * @param itemId - the id of the item
+	 * @return StoreItem - the item of the bill
+	 */
 	public static StoreItem getBillItem(int itemId) {
 		return ItemController.getItem(itemId);
 	}
 	
+	/**
+	 * This method is used to make a request at the api to retrieve all the bills from the store
+	 * @return List< Bill > - a list containing all the bills from the store
+	 */
 	private static List<Bill> getBills(){
 		List<Bill> bills = new LinkedList<Bill>();
 		

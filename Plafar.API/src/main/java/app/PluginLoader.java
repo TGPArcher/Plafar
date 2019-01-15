@@ -10,15 +10,34 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import interfaces.Plugable;
 
+/**
+ * PluginLoader is responsible for searching, identifying and loading of a plugin
+ * @param <T> - any extension of the Plugable interface can be loaded as a plugin
+ */
 public class PluginLoader<T extends Plugable> {
+	/**
+	 * The class type of the desired plugin
+	 */
 	private final Class<T> type;
+	/**
+	 * The loaded plugin
+	 */
 	private T plugin = null;
 	
+	/**
+	 * Initializes the loader
+	 * @param type - the class type of the desired plugin
+	 * @param directory - directory path where to look for that plugin
+	 */
 	public PluginLoader(Class<T> type, String directory) {
 		this.type = type;
 		searchForPlugins(directory);
 	}
 	
+	/**
+	 * This method is used to filter all the files from the directory and look at every jar if it is a plugin meeting all the requirements
+	 * @param directory - directory where it looks for jars
+	 */
 	private void searchForPlugins(String directory) {
 		File pluginsDir = new File(directory);
 		FilenameFilter fileFilter = new FilenameFilter() {
@@ -44,6 +63,12 @@ public class PluginLoader<T extends Plugable> {
 		}
 	}
 	
+	/**
+	 * This method is used to load a jar and verify its contents if it is a plugin and fits all criteria required to load and initialize it further 
+	 * @param jar - file path to tha jar
+	 * @return If the jar from the path is the plugin which fits the configuration then the plugin is returned.
+	 * If not it returns null
+	 */
 	@SuppressWarnings({ "unchecked" })
 	private T loadPlugin(File jar) {
 		T _plugin = null;
@@ -73,6 +98,13 @@ public class PluginLoader<T extends Plugable> {
 		return _plugin;
 	}
 	
+	/**
+	 * This method is used to list all classes inside a jar
+	 * @param jarPath - path to the jar file
+	 * @return List< String > - on success returns a list of classes inside the jar, on failure returns an empty list
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	private List<String> getJarClasses(String jarPath) throws FileNotFoundException, IOException {
 		List<String> classNames = new ArrayList<String>();
 		
@@ -90,6 +122,10 @@ public class PluginLoader<T extends Plugable> {
 		return classNames;
 	}
 	
+	/**
+	 * This method is used to retrieve the loaded plugin
+	 * @return
+	 */
 	public T getPlugin() {
 		return plugin;
 	}

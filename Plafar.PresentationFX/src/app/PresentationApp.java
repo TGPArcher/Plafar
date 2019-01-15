@@ -5,8 +5,14 @@ import controller.StoreController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * This is the main class of the presentation application.
+ * It controls the startup of the application, the initialization, and the closing.
+ */
 public class PresentationApp extends Application{
-	
+	/**
+	 * This method is used to start the application
+	 */
 	public void run() {
 		// start the api server
 		APIHandler.start();

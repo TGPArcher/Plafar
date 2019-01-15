@@ -7,6 +7,9 @@ import plafar.persistence.SQLiteHelper;
 import plafar.persistence.abstractions.Persistent;
 import plafar.persistence.abstractions.plugin.PlugablePersistence;
 
+/**
+ * RepositoryPersistencePlugin is a implementation for the PlugablePersistence using SQLite database
+ */
 public class RepositoryPersistencePlugin implements PlugablePersistence{
 
 	@Override

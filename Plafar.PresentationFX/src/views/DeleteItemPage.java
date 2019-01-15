@@ -7,8 +7,15 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import plafar.domain.StoreItem;
 
+/**
+ * DeleteItemPage is a view class responsible for creating the confirmation page when deleting a item from the store
+ */
 public class DeleteItemPage extends ItemPage{
 	
+	/**
+	 * Initializing DeleteItemPage with the item to be deleted
+	 * @param item - item to be deleted
+	 */
 	public DeleteItemPage(StoreItem item) {
 		if(item == null) {
 			return;

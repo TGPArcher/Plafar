@@ -8,10 +8,19 @@ import plafar.domain.StoreItem;
 import plafar.logic.abstractions.ShopingServices;
 import plafar.persistence.abstractions.Persistent;
 
+/**
+ * ShopServices is a implementation of ShopingServices using the services architecture for the store.
+ */
 public class ShopServices implements ShopingServices {
-
+	/**
+	 * This is the access to the database layer where service data is persisted
+	 */
 	Persistent<StoreItem> itemRepository = null;
 	
+	/**
+	 * Initializes the service with dependency injection
+	 * @param itemRepository - database access class implementing the Persistent< StoreItem >
+	 */
 	@Inject
 	public ShopServices(Persistent<StoreItem> itemRepository) {
 		this.itemRepository = itemRepository;

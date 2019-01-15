@@ -15,13 +15,29 @@ import javafx.scene.layout.*;
 import plafar.domain.Bill;
 import plafar.domain.StoreItem;
 
+/**
+ * BillListPage is a view class responsible for creating the page where all the bills are listed
+ */
 public class BillListPage extends Page{
 	
+	/**
+	 * List of bills to show
+	 */
 	private List<Bill> bills = null;
+	/**
+	 * List of containers containing displayed bills
+	 */
 	private ListView<HBox> list = null;
 	
+	/**
+	 * The button for deleting bills
+	 */
 	private Button deleteBtn = null;
 	
+	/**
+	 * Initializes the BillListPage with the list of bills provided
+	 * @param bills - bills to show on page
+	 */
 	public BillListPage(List<Bill> bills) {
 		if(bills == null) {
 			bills = new LinkedList<Bill>();
@@ -30,7 +46,7 @@ public class BillListPage extends Page{
 		setTitle("Bill History");
 		this.bills = bills;
 		contents = doContents();
-		setControllButtonsAction();
+		setControlButtonsAction();
 	}
 	
 	@Override
@@ -38,7 +54,7 @@ public class BillListPage extends Page{
 		// delete button
 		deleteBtn = new Button("Delete");
 		deleteBtn.setAlignment(Pos.CENTER_LEFT);
-		setDisableControllButtons(true);
+		setDisableControlButtons(true);
 		Region btnRegion = new Region();
 		HBox.setHgrow(btnRegion, Priority.ALWAYS);
 		HBox btnBox = new HBox(btnRegion, deleteBtn);
@@ -54,7 +70,7 @@ public class BillListPage extends Page{
 		list.getSelectionModel().selectedItemProperty().addListener(
 	            new ChangeListener<HBox>() {
 	                public void changed(ObservableValue<? extends HBox> ov, HBox old_val, HBox new_val) {
-	                	setDisableControllButtons(false);
+	                	setDisableControlButtons(false);
 	                }
 	            });
 		VBox.setVgrow(list, Priority.ALWAYS);		
@@ -67,6 +83,11 @@ public class BillListPage extends Page{
 		return pageContent;
 	}
 	
+	/**
+	 * This method is creating containers which display bills
+	 * @param bill - the bill to be displayed
+	 * @return HBox - a container with all the nodes displaying bill data
+	 */
 	private HBox getBillBox(Bill bill) {
 		HBox billBox = new HBox(10);
 		billBox.setAlignment(Pos.CENTER_LEFT);
@@ -108,11 +129,18 @@ public class BillListPage extends Page{
 		return billBox;
 	}
 	
-	private void setDisableControllButtons(boolean val) {
+	/**
+	 * This method is used to make control buttons from the page active or inactive
+	 * @param val - true - all control buttons are disabled, false - all control buttons are enabled
+	 */
+	private void setDisableControlButtons(boolean val) {
 		deleteBtn.setDisable(val);
 	}
 	
-	private void setControllButtonsAction() {
+	/**
+	 * This method is used to set action to control buttons
+	 */
+	private void setControlButtonsAction() {
 		deleteBtn.setOnAction((event) -> {
 			int index = list.getSelectionModel().getSelectedIndex();
 			if(index != -1) {

@@ -15,7 +15,14 @@ import util.JsonUtil;
 import response.ResponseStatement;
 import views.*;
 
+/**
+ * StoreController is a controller class responsible for managing the view classes which operate with item and item related things.
+ * Makes requests to the api. Gets data and sends it to views. Listens to views inputs an act accordingly. 
+ */
 public final class StoreController {
+	/**
+	 * This method is used to set StoreListPage as application's active page
+	 */
 	public static void setStorePage() {
 		List<StoreItem> items = getItemList();
 		
@@ -27,6 +34,10 @@ public final class StoreController {
 		PageHandler.show();
 	}
 	
+	/**
+	 * This method is used to set SellItemPage as application's active page
+	 * @param item - the item being sold
+	 */
 	public static void sellItemPage(StoreItem item) {
 		if(item == null) {
 			return;
@@ -37,6 +48,11 @@ public final class StoreController {
 		PageHandler.show();
 	}
 	
+	/**
+	 * This method is used to make a request at the api to sell a item from the store
+	 * @param item - the item being sold
+	 * @param quantity - the number of items being sold
+	 */
 	public static void sellItem(StoreItem item, int quantity) {
 		try {
 			HttpResponse<JsonNode> jsonResponse = Unirest.put(APIHandler.getApiRoute() + "/items/sell/{quantity}")
@@ -66,6 +82,10 @@ public final class StoreController {
 		setStorePage();
 	}
 	
+	/**
+	 * This method is used to make a request at the api to retrieve the number of items from the store depending on what checkboxes are selected
+	 * @return List< StoreItem > - a list containing items from the store
+	 */
 	private static List<StoreItem> getItemList(){
 		List<StoreItem> items = new LinkedList<StoreItem>();
 		String itemPath = "";

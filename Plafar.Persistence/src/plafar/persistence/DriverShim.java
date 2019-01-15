@@ -8,9 +8,22 @@ import java.sql.SQLFeatureNotSupportedException;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+/**
+ * DriverShim is a extension class of Driver which does nothing new of his own.
+ * The whole purpose of it is the fact that the DriverManager does not accept a driver not loaded by the same ClassLoader as it was loaded, but DriverShim is a wrapper over
+ * an external loaded driver, and the fact that DriverShim is a class loaded by the main program it will share the same ClassLoader as the DriverManager thus being able to register
+ * a external loaded driver with DriverManager.
+ */
 class DriverShim implements Driver {
+	/**
+	 * The jdbc driver
+	 */
 	private Driver driver;
 	
+	/**
+	 * Initializing the DriverShim with a new driver
+	 * @param d
+	 */
 	DriverShim(Driver d) {
 		this.driver = d;
 	}
