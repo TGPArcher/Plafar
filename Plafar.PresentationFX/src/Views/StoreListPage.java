@@ -2,7 +2,6 @@ package views;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import controller.ItemController;
 import controller.StoreController;
 import javafx.beans.value.ChangeListener;
@@ -14,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import plafar.domain.StoreItem;
 
 /**
@@ -157,11 +157,16 @@ public class StoreListPage extends Page{
 		price.setAlignment(Pos.CENTER);
 		itemPane.getChildren().add(price);
 		
-		Button sellBtn = new Button("Sell");
-		sellBtn.setOnAction((event) -> {
-			StoreController.sellItemPage(item);
-		});
-		itemPane.getChildren().add(sellBtn);
+		if(item.getQuantity() > 0) {
+			Button sellBtn = new Button("Sell");
+			sellBtn.setOnAction((event) -> {
+				StoreController.sellItemPage(item);
+			});
+			itemPane.getChildren().add(sellBtn);
+		}
+		else {
+			itemPane.setBackground(new Background(new BackgroundFill(Color.ORANGERED, CornerRadii.EMPTY, Insets.EMPTY)));
+		}
 		
 		return itemPane;
 	}
