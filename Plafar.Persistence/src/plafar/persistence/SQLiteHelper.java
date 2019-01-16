@@ -55,9 +55,9 @@ public final class SQLiteHelper {
 	}
 	
 	/**
-	 * This method is used to tell the SQLiteHelper what is the path of program's executin directory
+	 * This method is used to tell the SQLiteHelper what is the path of program's execution directory
 	 * This is used to make sure that the external driver is found every time and no other path interfere with the helper.
-	 * @param path
+	 * @param path - the path to the execution directory
 	 */
 	public static void setDirectoryPath(String path) {
 		directoryPath = path;

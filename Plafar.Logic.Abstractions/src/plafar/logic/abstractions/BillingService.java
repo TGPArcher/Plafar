@@ -8,7 +8,7 @@ import plafar.domain.Bill;
 public interface BillingService {
 	/**
 	 * This method is used to retrieve all bills from the store
-	 * @return List< Bill > - a list containing all bills from store
+	 * @return List<Bill> - a list containing all bills from store
 	 */
 	List<Bill> getAllBills();
 	

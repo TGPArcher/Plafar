@@ -37,7 +37,7 @@ public interface Persistent<T> {
 	
 	/**
 	 * This method returns all the available objects of type T from the database
-	 * @return List < T > - A list of all the objects
+	 * @return List <T> - A list of all the objects
 	 */
 	List<T> getAllObjects();
 }

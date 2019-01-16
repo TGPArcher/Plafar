@@ -47,7 +47,7 @@ public final class PluginManager {
 	
 	/**
 	 * This method is used to retrieve application's executing directory path
-	 * @return
+	 * @return String - the path to application's executing directory
 	 */
 	public static String getDirectoryPath() {
 		if(directoryPath == null) {

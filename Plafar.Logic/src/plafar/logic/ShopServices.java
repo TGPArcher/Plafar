@@ -19,7 +19,7 @@ public class ShopServices implements ShopingServices {
 	
 	/**
 	 * Initializes the service with dependency injection
-	 * @param itemRepository - database access class implementing the Persistent< StoreItem >
+	 * @param itemRepository - database access class implementing the Persistent<StoreItem>
 	 */
 	@Inject
 	public ShopServices(Persistent<StoreItem> itemRepository) {

@@ -44,19 +44,19 @@ public interface ShopingServices {
 	
 	/**
 	 * This method is used to retrieve all the items from the store
-	 * @return List< StoreItem > - a list containing all the items from store
+	 * @return List<StoreItem> - a list containing all the items from store
 	 */
 	List<StoreItem> getAllItems();
 	
 	/**
 	 * This method is used to retrieve all the items which are in stock from the store
-	 * @return List< StoreItem > - a list containing all the items from store which are in stock
+	 * @return List<StoreItem> - a list containing all the items from store which are in stock
 	 */
 	List<StoreItem> getAvailableItems();
 	
 	/**
 	 * This method is used to retrieve all the items which are out of stock from the store
-	 * @return List< StoreItem > - a list containing all the items from store which are out of stock
+	 * @return List<StoreItem> - a list containing all the items from store which are out of stock
 	 */
 	List<StoreItem> getUnavailableItems();
 }

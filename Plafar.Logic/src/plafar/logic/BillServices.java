@@ -17,7 +17,7 @@ public class BillServices implements BillingService {
 	
 	/**
 	 * Initializes the service with dependency injection, injecting the database layer
-	 * @param billRepository - a persistence class which implements the Persistent< Bill >
+	 * @param billRepository - a persistence class which implements the Persistent<Bill>
 	 */
 	@Inject
 	public BillServices(Persistent<Bill> billRepository) {

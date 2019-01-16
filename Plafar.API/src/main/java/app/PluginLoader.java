@@ -101,7 +101,7 @@ public class PluginLoader<T extends Plugable> {
 	/**
 	 * This method is used to list all classes inside a jar
 	 * @param jarPath - path to the jar file
-	 * @return List< String > - on success returns a list of classes inside the jar, on failure returns an empty list
+	 * @return List<String> - on success returns a list of classes inside the jar, on failure returns an empty list
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
@@ -124,7 +124,7 @@ public class PluginLoader<T extends Plugable> {
 	
 	/**
 	 * This method is used to retrieve the loaded plugin
-	 * @return
+	 * @return T - the loaded plugin, null if no plugin is loaded
 	 */
 	public T getPlugin() {
 		return plugin;
