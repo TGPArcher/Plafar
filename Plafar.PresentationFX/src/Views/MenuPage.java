@@ -10,17 +10,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
  * MenuPage is a view class responsible for creating the menu bar of the application
  */
 public class MenuPage extends Page {
-	/**
-	 * Contents of the menu page
-	 * Note: this class will go through refactoring and the pageContent will be removed, use contents instead
-	 */
-	private VBox pageContent = new VBox();
 	/**
 	 * The button which sets the StoreListPage as the application active page
 	 */
@@ -35,42 +31,45 @@ public class MenuPage extends Page {
 	 */
 	public MenuPage() {
 		setTitle("Main Menu");
-		pageContent.setFillWidth(true);
 		contents = doContents();
 		setButtonsAction();
 	}
 	
 	@Override
 	protected Parent doContents() {
+		VBox content = new VBox();
+		content.setFillWidth(true);
+		
 		// logo
-		addImage("file:resources/icons/plafar_logo_icon.png", false);
+		addImage("file:resources/icons/plafar_logo_icon.png", false, content);
 		
 		// app name
 		BorderPane namePane = new BorderPane();
 		Label appName = new Label("Plafar");
 		namePane.setCenter(appName);
-		pageContent.getChildren().add(namePane);
-		addSeparator();
+		content.getChildren().add(namePane);
+		addSeparator(content);
 		
 		// store list page
-		storeBtn = addButton("Store", "file:resources/icons/store_icon.png", true);
+		storeBtn = addButton("Store", "file:resources/icons/store_icon.png", true, content);
 		
 		// bill list page
-		billBtn = addButton("Bill history", "file:resources/icons/history_icon.png", false);
+		billBtn = addButton("Bill history", "file:resources/icons/history_icon.png", false, content);
 		
 		
-		return pageContent;
+		return content;
 	}
 	
 	/**
 	 * This method is used to add a separator to the page.
 	 * Mainly used to separate menu's buttons
+	 * @param content - the pane to which the separator will be added
 	 */
-	private void addSeparator() {
+	private void addSeparator(Pane content) {
 		Separator sep = new Separator();
 		sep.setPadding(new Insets(5));
 		
-		pageContent.getChildren().add(sep);
+		content.getChildren().add(sep);
 	}
 	
 	/**
@@ -105,8 +104,9 @@ public class MenuPage extends Page {
 	 * This method is used to add a image to menu's bar
 	 * @param graphicPath - the path to the image
 	 * @param separator - true - puts a separator after the image, false - is doing nothing
+	 * @param content - the pane to which the image will be added
 	 */
-	private void addImage(String graphicPath, boolean separator) {
+	private void addImage(String graphicPath, boolean separator, Pane content) {
 		if(graphicPath == null) {
 			return;
 		}
@@ -114,9 +114,9 @@ public class MenuPage extends Page {
 		BorderPane pane = new BorderPane();
 		pane.setCenter(getImage(graphicPath));
 		
-		pageContent.getChildren().add(pane);
+		content.getChildren().add(pane);
 		if(separator) {
-			addSeparator();
+			addSeparator(content);
 		}
 	}
 	
@@ -125,9 +125,10 @@ public class MenuPage extends Page {
 	 * @param text - text of the button being added
 	 * @param graphicPath - the path to the image of the button
 	 * @param separator - true - puts a separator after the image, false - is doing nothing
+	 * @param content - the pane to which the button will be added
 	 * @return Button - the newly added button
 	 */
-	private Button addButton(String text, String graphicPath, boolean separator) {
+	private Button addButton(String text, String graphicPath, boolean separator, Pane content) {
 		ImageView btnImage = null;
 		if(graphicPath != null) {
 			btnImage = getImage(graphicPath);
@@ -141,9 +142,9 @@ public class MenuPage extends Page {
 		btn.setAlignment(Pos.CENTER_LEFT);
 		btn.setMaxWidth(Double.MAX_VALUE);
 		
-		pageContent.getChildren().add(btn);
+		content.getChildren().add(btn);
 		if(separator) {
-			addSeparator();
+			addSeparator(content);
 		}
 		
 		return btn;
