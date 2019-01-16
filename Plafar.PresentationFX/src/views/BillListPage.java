@@ -94,8 +94,9 @@ public class BillListPage extends Page{
 		
 		try {
 			StoreItem item = BillController.getBillItem(bill.getItemId());
+			String itemName = item == null ? "Item unavailable" : item.getName();
 			Label nameLabel = new Label("Name:");
-			Label name = new Label(item.getName());
+			Label name = new Label(itemName);
 			
 			Region reg1 = new Region();
 			HBox.setHgrow(reg1, Priority.ALWAYS);
