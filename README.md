@@ -18,7 +18,5 @@ pick a plant and sell it, keeps record of sales.
 * Download plafar_setup which is attached at the release tab
 
 ## Documentation
-Every project has a "doc" folder where you can see the java doc
-
-## Wiki
-Coming soon
+* For JavaDoc see for each project the "./docs" directory
+* For more explanations see [Wiki](https://github.com/TGPArcher/Plafar/wiki)
