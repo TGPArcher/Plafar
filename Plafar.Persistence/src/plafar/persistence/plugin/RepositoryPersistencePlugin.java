@@ -39,6 +39,7 @@ public class RepositoryPersistencePlugin implements PlugablePersistence{
 
 	@Override
 	public void intitialize(String args[]) {
+		SQLiteHelper.setDatabaseUrl(System.getProperty("user.home") + "/Plafar");
 		SQLiteHelper.setDirectoryPath(args[0]);
 		SQLiteHelper.setExternalJarName("sqlite-jdbc-3.23.1.jar");
 		SQLiteHelper.setExternal(true);

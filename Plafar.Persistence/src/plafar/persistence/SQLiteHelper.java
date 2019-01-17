@@ -1,5 +1,6 @@
 package plafar.persistence;
 
+import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.sql.Connection;
@@ -26,6 +27,11 @@ public final class SQLiteHelper {
 	 */
 	private static String externalJarName = null;
 	/**
+	 * This is the connection url to the database file
+	 * It is initialized by plugin's initialize() method
+	 */
+	private static String databaseUrl = null;
+	/**
 	 * The connection to the database.
 	 * Only one connection to the database is opened during the execution of the program as opening a connection is resources costly
 	 */
@@ -36,6 +42,17 @@ public final class SQLiteHelper {
 	 */
 	private SQLiteHelper() {
 		
+	}
+	
+	/**
+	 * This method is used to set the connection url to the database, and if database's parent folder does not exist it creates it
+	 * @param url - the path to the database file
+	 */
+	public static void setDatabaseUrl(String url) {
+		if(url != null) {
+			new File(url).mkdirs();
+			databaseUrl = "jdbc:sqlite:" + url + "/plafar.db";
+		}
 	}
 	
 	/**
@@ -81,8 +98,7 @@ public final class SQLiteHelper {
 	 */
 	private static void connect() {
 		try {
-			String url = "jdbc:sqlite:plafar.db";
-			conn = DriverManager.getConnection(url);
+			conn = DriverManager.getConnection(databaseUrl);
 		}
 		catch(SQLException e) {
 			if(externalDriver && externalJarName != null) {
@@ -104,10 +120,10 @@ public final class SQLiteHelper {
 			URLClassLoader ucl = new URLClassLoader(new URL[] { u });
 			Driver d = (Driver)Class.forName(classname, true, ucl).newInstance();
 			DriverManager.registerDriver(new DriverShim(d));
-			conn = DriverManager.getConnection("jdbc:sqlite:plafar.db");
+			conn = DriverManager.getConnection(databaseUrl);
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e);
 			System.err.println("Can't find or connect to external jdbc driver!");
 		}
 	}
